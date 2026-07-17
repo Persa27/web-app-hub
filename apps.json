@@ -13,8 +13,8 @@
     },
     {
       "id": "mogumon",
-      "name": "MoguMoguMonster",
-      "kana": "もぐもぐもんすたー",
+      "name": "モグモン",
+      "kana": "もぐもん",
       "url": "https://mogumon.vercel.app/",
       "image": "img/mogumon.png",
       "tape": "pink",
