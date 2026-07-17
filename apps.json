@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "id": "treasure",
+      "name": "AR宝さがし",
+      "kana": "えーあーるたからさがし",
+      "url": "https://indoor-treasure-hunt.vercel.app/",
+      "image": "img/treasure.png",
+      "tape": "blue",
+      "description": "スマホをかざして、へやの中にたからをかくそう。もうひとりはレーダーをたよりに、かくされたたからをさがすよ。おうちの中がぼうけんの島になる、2人であそぶARゲーム。",
+      "tags": ["ARあそび", "2人でこうたい", "おうちの中で"],
+      "note": "ARCore対応のAndroid + Chromeであそべます(iPhoneではあそべません)"
+    },
+    {
+      "id": "mogumon",
+      "name": "MoguMoguMonster",
+      "kana": "もぐもぐもんすたー",
+      "url": "https://mogumon.vercel.app/",
+      "image": "img/mogumon.png",
+      "tape": "pink",
+      "description": "まんまるモンスターの「モモ」に、りんごやおさかなをたべさせてそだてよう。たべるたびにポイントがたまって、レベルアップ&しんか!ずかんでせいちょうのきろくも見られるよ。",
+      "tags": ["そだてるゲーム", "ひとりで", "ほごしゃメニューつき"],
+      "note": "スマホ・タブレット・パソコンのブラウザであそべます"
+    }
+  ]
+}
