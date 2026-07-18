@@ -100,6 +100,7 @@ body {
 }
 .tape-blue { background: rgba(95, 138, 166, 0.55); }
 .tape-pink { background: rgba(227, 154, 167, 0.6); }
+.tape-yellow { background: rgba(217, 165, 63, 0.55); }
 
 .app-body {
   display: flex;
