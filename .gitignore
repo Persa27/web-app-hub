@@ -1,2 +1,3 @@
 .vercel
+.worktrees/
 .claude/settings.local.json
