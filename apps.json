@@ -64,7 +64,7 @@
       "id": "math-marathon",
       "name": "さんすうマラソン",
       "kana": "さんすうまらそん",
-      "url": "https://session-screens.vercel.app",
+      "url": "https://math-marathon.vercel.app/",
       "image": "img/math-marathon.svg",
       "tape": "blue",
       "description": "計算もレースもがんばろう。4つのこたえからえらんで、せいかいすると走るはやさがアップ！100人レースでゴールをめざす、さんすうゲーム。",
