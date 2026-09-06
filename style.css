@@ -228,6 +228,24 @@ body {
 
 .oyako-title::before { content: "✎ "; color: var(--mustard); }
 
+.privacy-policy {
+  max-width: 720px;
+  margin-top: 28px;
+}
+
+.privacy-policy h2:not(:first-child) {
+  margin-top: 28px;
+}
+
+.privacy-policy p + p {
+  margin-top: 14px;
+}
+
+.privacy-policy a:not(.play-btn) {
+  color: var(--blue);
+  font-weight: 700;
+}
+
 /* ---- フッター ---- */
 
 .site-footer {
