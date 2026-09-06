@@ -10,6 +10,7 @@
   --blue: #5f8aa6;
   --pink: #e39aa7;
   --mustard: #d9a53f;
+  --green: #7a9e6e;
   --card: #fffdf6;
 }
 
@@ -100,6 +101,8 @@ body {
 }
 .tape-blue { background: rgba(95, 138, 166, 0.55); }
 .tape-pink { background: rgba(227, 154, 167, 0.6); }
+.tape-yellow { background: rgba(217, 165, 63, 0.55); }
+.tape-green { background: rgba(122, 158, 110, 0.55); }
 
 .app-body {
   display: flex;
@@ -224,6 +227,24 @@ body {
 }
 
 .oyako-title::before { content: "✎ "; color: var(--mustard); }
+
+.privacy-policy {
+  max-width: 720px;
+  margin-top: 28px;
+}
+
+.privacy-policy h2:not(:first-child) {
+  margin-top: 28px;
+}
+
+.privacy-policy p + p {
+  margin-top: 14px;
+}
+
+.privacy-policy a:not(.play-btn) {
+  color: var(--blue);
+  font-weight: 700;
+}
 
 /* ---- フッター ---- */
 
