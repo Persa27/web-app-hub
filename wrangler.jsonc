@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
+  "name": "tamalab-hub",
+  "pages_build_output_dir": ".pages-dist",
+  "compatibility_date": "2026-10-19"
+}

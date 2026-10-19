@@ -1,0 +1,12 @@
+{
+  "entries": [
+    { "from": "index.html" },
+    { "from": "main.js" },
+    { "from": "style.css" },
+    { "from": "apps.json" },
+    { "from": "privacy-quiz-boost.html" },
+    { "from": "img/favicon.svg" },
+    { "from": "img/tamalab-logo.webp" },
+    { "from": "img/thumbnails/gameplay" }
+  ]
+}
