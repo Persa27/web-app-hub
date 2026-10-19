@@ -1,79 +1,148 @@
 {
   "apps": [
     {
-      "id": "treasure",
-      "name": "AR宝さがし",
-      "kana": "えーあーるたからさがし",
-      "url": "https://indoor-treasure-hunt.vercel.app/",
-      "image": "img/treasure.png",
-      "tape": "blue",
-      "description": "スマホをかざして、へやの中にたからをかくそう。もうひとりはレーダーをたよりに、かくされたたからをさがすよ。おうちの中がぼうけんの島になる、2人であそぶARゲーム。",
-      "tags": [
-        "ARあそび",
-        "2人でこうたい",
-        "おうちの中で"
-      ],
-      "note": "ARCore対応のAndroid + Chromeであそべます(iPhoneではあそべません)"
-    },
-    {
-      "id": "mogumon",
-      "name": "モグモン",
-      "kana": "もぐもん",
-      "url": "https://mogumon.vercel.app/",
-      "image": "img/mogumon.png",
-      "tape": "pink",
-      "description": "ごはんの時間にひらく、たべるのがたのしくなるアプリ。子どもがひとくちたべるたびに、モンスターの「モモ」にもごはんをあげられるよ。いっぱいたべさせるとレベルアップして、しんかする!",
-      "tags": [
-        "しょくじおうえん",
-        "ごはんの時間に",
-        "そだてるゲーム"
-      ],
-      "note": "スマホ・タブレット・パソコンのブラウザであそべます"
-    },
-    {
-      "id": "ballrace",
-      "name": "ボールレース",
-      "kana": "ぼーるれーす",
-      "url": "https://ball-race-ivory.vercel.app/",
-      "image": "img/ballrace.png",
-      "tape": "yellow",
-      "description": "8このボールから、おうえんする子をえらぼう。ポイントをかけて「レース開始!」をおすと、みんなでドキドキのレースを見まもるよ。あたるとポイントが8ばいにふえる!",
-      "tags": [
-        "レースかんせん",
-        "うんだめし",
-        "ひとりで"
-      ],
-      "note": "スマホ・タブレット・パソコンのブラウザであそべます"
+      "id": "sock-pair",
+      "categories": ["learn"],
+      "name": "靴下神経衰弱",
+      "kana": "くつしたしんけいすいじゃく",
+      "url": "https://tamalab-sock-pair.pages.dev/",
+      "image": "img/thumbnails/gameplay/sock-pair.webp",
+      "imageAlt": "靴下神経衰弱。同じ柄の黒い靴下と木のタンス、実際のゲーム画面。「おなじペアを、みつけよう！」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "green",
+      "description": "洗濯物の山から、そっくりな黒い靴下を見つけよう。柄や丈、黒の濃さを見くらべて、同じ2枚をタンスへ。25ペアをそろえると、タンスが踊ってお祝いするよ。",
+      "tags": ["ペアさがし", "じっくり見くらべ", "ひとりで"],
+      "note": "スマホはたて向きで。タブレット・パソコンのブラウザでもあそべます"
     },
     {
       "id": "chimo",
+      "status": "development",
+      "categories": ["grow", "race"],
       "name": "チモレース",
       "kana": "ちもれーす",
-      "url": "https://chimo-race.vercel.app",
-      "image": "img/chimo.png",
+      "url": "https://tamalab-chimo-race.pages.dev/",
+      "image": "img/thumbnails/gameplay/chimo.webp",
+      "imageAlt": "チモレース。麦わら帽子のチモと実際の育成画面、「そだてて、レース！」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
       "tape": "green",
       "description": "かわいい生きもの「チモ」を、ごはんをあげたりとっくんしたりして、そだてよう。走力やスタミナがのびてきたら、リーグのレースにちょうせん!かちぬいて、チモをどんどんしんかさせよう。",
-      "tags": [
-        "チモをそだてる",
-        "レースにちょうせん",
-        "ひとりで"
-      ],
+      "tags": ["チモをそだてる", "レースにちょうせん", "ひとりで"],
       "note": "スマホ・タブレット・パソコンのブラウザであそべます(がめんを横向きにしてね)"
     },
     {
+      "id": "ballrace",
+      "status": "development",
+      "categories": ["race"],
+      "name": "ボールレース",
+      "kana": "ぼーるれーす",
+      "url": "https://tamalab-ball-race.pages.dev/",
+      "image": "img/thumbnails/gameplay/ballrace.webp",
+      "imageAlt": "ボールレース。立体コースを進むボールと実際のレース画面、「だれが、いちばん？」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "yellow",
+      "description": "8このボールから、おうえんする子をえらぼう。ポイントをかけて「レース開始!」をおすと、みんなでドキドキのレースを見まもるよ。あたるとポイントが8ばいにふえる!",
+      "tags": ["レースかんせん", "うんだめし", "ひとりで"],
+      "note": "スマホ・タブレット・パソコンのブラウザであそべます"
+    },
+    {
+      "id": "mogumon",
+      "categories": ["grow"],
+      "name": "モグモン",
+      "kana": "もぐもん",
+      "url": "https://tamalab-mogumon.pages.dev/",
+      "image": "img/thumbnails/gameplay/mogumon.webp",
+      "imageAlt": "モグモン。草原の白いモンスターと実際の食事画面、「ごはんで、そだつ。」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "pink",
+      "description": "ごはんの時間にひらく、たべるのがたのしくなるアプリ。子どもがひとくちたべるたびに、モンスターの「モモ」にもごはんをあげられるよ。いっぱいたべさせるとレベルアップして、しんかする!",
+      "tags": ["しょくじおうえん", "ごはんの時間に", "そだてるゲーム"],
+      "note": "スマホ・タブレット・パソコンのブラウザであそべます"
+    },
+    {
+      "id": "treasure",
+      "categories": ["adventure"],
+      "name": "AR宝さがし",
+      "kana": "えーあーるたからさがし",
+      "url": "https://tamalab-indoor-treasure-hunt.pages.dev/",
+      "image": "img/thumbnails/gameplay/treasure.webp",
+      "imageAlt": "AR宝さがし。スタート画面と「かくす→さがす」の遊び方、「へやが、ぼうけんの島に。」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "blue",
+      "description": "スマホをかざして、へやの中にたからをかくそう。もうひとりはレーダーをたよりに、かくされたたからをさがすよ。おうちの中がぼうけんの島になる、2人であそぶARゲーム。",
+      "tags": ["ARあそび", "2人でこうたい", "おうちの中で"],
+      "note": "ARCore対応のAndroid + Chromeであそべます(iPhoneではあそべません)"
+    },
+    {
+      "id": "fossil-excavation",
+      "categories": ["adventure"],
+      "name": "化石発掘",
+      "kana": "かせきはっくつ",
+      "url": "https://tamalab-kaseki-excavation.pages.dev/",
+      "image": "img/thumbnails/gameplay/fossil-excavation.webp",
+      "imageAlt": "化石発掘。土のブロックから見つかったアンモナイトとハンマー、ピック、ブラシのイラスト。",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "blue",
+      "description": "岩を少しずつ削って、アンモナイトの化石を見つけよう。ハンマーやピック、ブラシを使い分けて発掘に挑戦。きれいに見つけて、高得点をめざそう。",
+      "tags": ["化石発掘", "道具をつかいわけ", "ひとりで"],
+      "note": "スマホ・タブレット・パソコンのブラウザであそべます"
+    },
+    {
       "id": "math-marathon",
+      "status": "development",
+      "categories": ["learn", "race"],
       "name": "さんすうマラソン",
       "kana": "さんすうまらそん",
-      "url": "https://math-marathon.vercel.app/",
-      "image": "img/math-marathon.svg",
+      "url": "https://tamalab-math-marathon.pages.dev/",
+      "image": "img/thumbnails/gameplay/math-marathon.webp",
+      "imageAlt": "さんすうマラソン。走る選手と計算問題のプレイ画面、「こたえて、はしろう！」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
       "tape": "blue",
       "description": "計算もレースもがんばろう。4つのこたえからえらんで、せいかいすると走るはやさがアップ！100人レースでゴールをめざす、さんすうゲーム。",
+      "tags": ["さんすう", "レース", "ひとりで"],
+      "note": "よこむきのタブレット・パソコンであそべます"
+    },
+    {
+      "id": "quiz-zukan",
+      "categories": ["learn"],
+      "name": "なまえあてクイズ",
+      "kana": "なまえあてくいず",
+      "url": "https://tamalab-quiz-zukan.pages.dev/",
+      "image": "img/thumbnails/gameplay/quiz-zukan.webp",
+      "imageAlt": "なまえあてクイズ。サイの出題画像と実際の4択クイズ画面。「みて、なまえをあてよう！」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "green",
+      "description": "はな・やさい・くだもの・むし・どうぶつ・さかな・こっき・くるまの画像を見て、なまえを当てよう。9ジャンル397問の4択クイズ。",
+      "tags": ["4たくクイズ", "9ジャンル", "ひとりで"],
+      "note": "スマホ・タブレット・パソコンのブラウザであそべます"
+    },
+    {
+      "id": "sentinel-blacklist",
+      "categories": [
+        "adventure"
+      ],
+      "name": "SENTINEL",
+      "kana": "せんちねる",
+      "url": "https://tamalab-sentinel-blacklist.pages.dev/",
+      "image": "img/thumbnails/gameplay/sentinel.webp",
+      "imageAlt": "SENTINEL。実際の監視画面と、服装は同じで顔が違う人物。「服は同じ、顔は違う。」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "blue",
+      "description": "監視カメラの映像と手配書を見比べ、ブラックリストの人物を見つけよう。服が似ていても顔は別人かも。見誤りに気をつけながら通報し、次々届くRUSH通知に対応する監視アクションゲーム。",
       "tags": [
-        "さんすう",
-        "レース",
+        "顔を見分ける",
+        "監視アクション",
         "ひとりで"
       ],
-      "note": "よこむきのタブレット・パソコンであそべます"
+      "note": "スマホはたて向きで。タブレット・パソコンのブラウザでもあそべます"
     }
   ]
 }

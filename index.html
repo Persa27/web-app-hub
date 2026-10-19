@@ -1,50 +1,215 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tamaの子どもアプリひろば</title>
-<meta name="description" content="ブラウザですぐあそべる、子ども向けの手づくりウェブアプリを集めたページです。ダウンロードもインストールもいりません。">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F3A0;</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header class="site-header">
-  <p class="header-kazari" aria-hidden="true">&#9734; &#9737; &#9734; &#9737; &#9734;</p>
-  <h1 class="site-title">tamaの<span class="title-accent">子どもアプリ</span>ひろば</h1>
-  <p class="site-lead">
-    ブラウザで ひらくだけで あそべる、手づくりのウェブアプリを あつめました。<br>
-    ダウンロードも インストールも いりません。
-  </p>
-</header>
-
-<main>
-  <section class="apps" id="apps" aria-label="アプリいちらん">
-    <noscript><p class="noscript-msg">アプリいちらんの表示にはJavaScriptが必要です。</p></noscript>
-  </section>
-
-  <section class="oyako-note">
-    <h2 class="oyako-title">おうちのかたへ</h2>
-    <p>
-      このページのアプリは、すべて個人が趣味で制作した無料のウェブアプリです。
-      会員登録は不要で、広告も表示されません。
-      お子さまがあそぶときは、それぞれのアプリの説明にある対応機種をご確認ください。
-    </p>
-    <p>
-      Androidアプリ「クイズブースト！ さんすう」の<a href="privacy-quiz-boost.html">プライバシーポリシー</a>と、
-      保護者のかた向けの問い合わせ先は <a href="mailto:tama.lab.support@gmail.com">tama.lab.support@gmail.com</a> です。
-    </p>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <p>&copy; 2026 tama &mdash; あたらしいアプリができたら、ここにふえていきます。</p>
-</footer>
-
-<script src="main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f9fc" />
+    <title>tamalab | 子どもアプリひろば</title>
+    <meta
+      name="description"
+      content="tamalabの子どもアプリひろば。あそんで、そだてて、ちょっとまなんで。ブラウザですぐあそべる、無料・登録不要・広告なしの手づくりアプリ集。"
+    />
+    <link rel="icon" href="img/favicon.svg?v=tamalab" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=0fd8129118" />
+    <script src="main.js?v=38d5308731" defer></script>
+  </head>
+  <body class="home">
+    <a class="skip-link" href="#playground">あそびをえらぶところへ</a>
+    <header class="site-nav">
+      <div class="nav-inner wrap">
+        <a class="brand" href="./" aria-label="tamalab 子どもアプリひろば ホーム">
+          <img class="brand-logo" src="img/tamalab-logo.webp" alt="tamalab" width="720" height="217" />
+          <span class="brand-caption">子どもアプリひろば</span>
+        </a>
+        <nav aria-label="メインメニュー">
+          <a href="#for-parents"
+            >おうちのかたへ <span class="nav-dot" aria-hidden="true"></span
+          ></a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section
+        class="playground wrap"
+        id="playground"
+        aria-labelledby="playground-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow section-eyebrow">PICK YOUR PLAY</p>
+            <h1 id="playground-title">
+              どれで、あそぶ？<span class="heading-spark" aria-hidden="true"
+                >✳</span
+              >
+            </h1>
+          </div>
+          <p class="section-caption">公開中の画像をタップして、あそびにいこう。</p>
+        </div>
+        <div class="filter-bar" id="filter-bar" hidden>
+          <div class="filters" role="group" aria-label="あそびのしゅるい">
+            <button
+              type="button"
+              class="filter-button is-active"
+              data-filter="all"
+              aria-pressed="true"
+            >
+              ぜんぶ <span id="total-count"></span>
+            </button>
+            <button
+              type="button"
+              class="filter-button"
+              data-filter="adventure"
+              aria-pressed="false"
+            >
+              <span class="filter-symbol" aria-hidden="true">✧</span>ぼうけん
+            </button>
+            <button
+              type="button"
+              class="filter-button"
+              data-filter="grow"
+              aria-pressed="false"
+            >
+              <span class="filter-symbol" aria-hidden="true">♧</span>そだてる
+            </button>
+            <button
+              type="button"
+              class="filter-button"
+              data-filter="race"
+              aria-pressed="false"
+            >
+              <span class="filter-symbol" aria-hidden="true">⚑</span>レース
+            </button>
+            <button
+              type="button"
+              class="filter-button"
+              data-filter="learn"
+              aria-pressed="false"
+            >
+              <span class="filter-symbol" aria-hidden="true">＋</span>まなぶ
+            </button>
+          </div>
+          <p class="result-count" id="result-count" role="status"></p>
+        </div>
+        <div class="apps" id="apps" aria-busy="true">
+          <p class="loading-message" role="status">あそびをならべています…</p>
+        </div>
+        <noscript
+          ><div class="fallback-links">
+            <p>ここからアプリをひらいてね。</p>
+            <a href="https://tamalab-indoor-treasure-hunt.pages.dev/"
+              >AR宝さがし（ARCore対応Android・Chrome専用）</a
+            ><a href="https://tamalab-mogumon.pages.dev/">モグモン</a
+            ><a href="https://tamalab-sock-pair.pages.dev/">靴下神経衰弱</a
+            ><a href="https://tamalab-quiz-zukan.pages.dev/">なまえあてクイズ</a
+            ><a href="https://one-cut-balance.vercel.app/">カットバランス</a>
+          </div>
+          <style>
+            .loading-message {
+              display: none;
+            }
+          </style></noscript
+        >
+        <p class="playground-note">
+          <span aria-hidden="true">↗</span>
+          公開中のアプリは、画像をタップするとあたらしいタブであそべます。
+        </p>
+      </section>
+      <section
+        class="development-section wrap"
+        id="development"
+        aria-labelledby="development-title"
+        hidden
+      >
+        <div class="development-heading">
+          <div>
+            <p class="eyebrow">IN DEVELOPMENT</p>
+            <h2 id="development-title">開発中のアプリ</h2>
+          </div>
+          <p>あたらしいあそびを、ただいま準備中です。</p>
+        </div>
+        <div class="apps development-apps" id="development-apps"></div>
+      </section>
+      <div class="promise-strip wrap" aria-label="ひろばのおやくそく">
+        <p>
+          <span class="promise-icon" aria-hidden="true">¥<i></i></span
+          >ぜんぶ無料
+        </p>
+        <span class="promise-divider" aria-hidden="true"></span>
+        <p>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5H5v14h14v-3M12 4h8v8m-1-7L9 15" /></svg
+          >登録いらず
+        </p>
+        <span class="promise-divider" aria-hidden="true"></span>
+        <p>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m12 3 8 3v6c0 4-8 9-8 9s-8-5-8-9V6Z" />
+            <path d="m8 12 3 3 5-6" /></svg
+          >広告なし
+        </p>
+        <span class="promise-note">あそびたい気持ちがあれば、準備OK。</span>
+      </div>
+      <section
+        class="parents wrap"
+        id="for-parents"
+        aria-labelledby="parents-title"
+      >
+        <div class="parents-intro">
+          <span class="parent-flower" aria-hidden="true">✿</span>
+          <p class="eyebrow">FOR PARENTS</p>
+          <h2 id="parents-title">
+            いっしょに笑う時間が、<br />すこし増えますように。
+          </h2>
+          <p>おうちのかたへ</p>
+        </div>
+        <div class="parents-content">
+          <p>
+            このひろばは、tamalabがひとつずつつくった、<br
+              class="desktop-break"
+            />子どものための小さなアプリ集です。
+          </p>
+          <p>
+            ここで紹介するウェブアプリは、すべて無料。<br />会員登録や広告はありません。お子さまの「やってみたい」を、そばでいっしょに楽しんでいただけたらうれしいです。
+          </p>
+          <p class="device-guidance">
+            アプリごとに使える端末が異なります。<br />あそぶ前に、各アプリの対応端末をご確認ください。
+          </p>
+          <details class="parent-details">
+            <summary>
+              お問い合わせ・プライバシーポリシー
+              <span aria-hidden="true">＋</span>
+            </summary>
+            <div>
+              <p>
+                保護者のかたからのお問い合わせ：<br /><a
+                  href="mailto:tama.lab.support@gmail.com"
+                  >tama.lab.support@gmail.com</a
+                >
+              </p>
+              <p>
+                Androidアプリ「クイズラッシュ！さんすう」の<br /><a
+                  href="privacy-quiz-boost.html"
+                  >プライバシーポリシー <span aria-hidden="true">↗</span></a
+                >
+              </p>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer wrap home-footer">
+      <a class="footer-brand" href="./" aria-label="tamalab ホーム">
+        <img class="footer-logo" src="img/tamalab-logo.webp" alt="tamalab" width="720" height="217" />
+        <span>あそびのつづきを、つくろう。</span>
+      </a>
+      <p>© 2026 tamalab</p>
+      <a class="back-top" href="#" aria-label="ページのいちばん上へ">↑</a>
+    </footer>
+  </body>
 </html>
