@@ -1,0 +1,65 @@
+{
+  "checkedAt": "2026-10-19T05:01:28.917Z",
+  "sites": [
+    {
+      "name": "tamalab-hub",
+      "status": 200,
+      "title": "tamalab | 子どもアプリひろば",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-sock-pair",
+      "status": 200,
+      "title": "靴下神経衰弱",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-chimo-race",
+      "status": 200,
+      "title": "チモレース",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-ball-race",
+      "status": 200,
+      "title": "ボールレース",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-mogumon",
+      "status": 200,
+      "title": "MoguMoguMonster",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-indoor-treasure-hunt",
+      "status": 200,
+      "title": "AR宝探し - 室内で遊ぶARトレジャーハント",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-kaseki-excavation",
+      "status": 200,
+      "title": "化石発掘室",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-math-marathon",
+      "status": 200,
+      "title": "まっとらそん",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-quiz-zukan",
+      "status": 200,
+      "title": "なまえあてクイズ",
+      "missingAssetStatus": 404
+    },
+    {
+      "name": "tamalab-sentinel-blacklist",
+      "status": 200,
+      "title": "SENTINEL // Blacklist Intercept",
+      "missingAssetStatus": 404
+    }
+  ]
+}

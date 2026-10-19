@@ -1,0 +1,86 @@
+{
+  "checkedAt": "2026-10-19T05:04:06.894Z",
+  "sites": [
+    {
+      "name": "tama-lab",
+      "status": 200,
+      "target": "https://tamalab-hub.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "sock-pair",
+      "status": 200,
+      "target": "https://tamalab-sock-pair.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "chimo-race",
+      "status": 200,
+      "target": "https://tamalab-chimo-race.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "ball-race",
+      "status": 200,
+      "target": "https://tamalab-ball-race.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "mogumon",
+      "status": 200,
+      "target": "https://tamalab-mogumon.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "indoor-treasure-hunt",
+      "status": 200,
+      "target": "https://tamalab-indoor-treasure-hunt.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "kaseki-excavation",
+      "status": 200,
+      "target": "https://tamalab-kaseki-excavation.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "math-marathon",
+      "status": 200,
+      "target": "https://tamalab-math-marathon.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "quiz-zukan",
+      "status": 200,
+      "target": "https://tamalab-quiz-zukan.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    },
+    {
+      "name": "sentinel-blacklist",
+      "status": 200,
+      "target": "https://tamalab-sentinel-blacklist.pages.dev/",
+      "correctLink": true,
+      "saveNotice": true,
+      "deploymentLogPublished": false
+    }
+  ],
+  "oldPrivacyPolicyPreserved": true
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "tamalab-hub",
+    "subdomain": "tamalab-hub.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "0b1bd9b3-1d0e-4690-86eb-c80f3407f58a",
+    "deploymentUrl": "https://0b1bd9b3.tamalab-hub.pages.dev",
+    "createdAt": "2026-10-19T04:58:12.551526Z"
+  },
+  {
+    "name": "tamalab-sock-pair",
+    "subdomain": "tamalab-sock-pair.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "8cfc4780-5d50-403b-93e3-cedfbb835cd5",
+    "deploymentUrl": "https://8cfc4780.tamalab-sock-pair.pages.dev",
+    "createdAt": "2026-10-19T04:56:34.137184Z"
+  },
+  {
+    "name": "tamalab-chimo-race",
+    "subdomain": "tamalab-chimo-race.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "e2397569-0ade-48cd-bd8c-ca361d68c822",
+    "deploymentUrl": "https://e2397569.tamalab-chimo-race.pages.dev",
+    "createdAt": "2026-10-19T04:52:16.172073Z"
+  },
+  {
+    "name": "tamalab-sentinel-blacklist",
+    "subdomain": "tamalab-sentinel-blacklist.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "525f9bcb-0ec1-4e62-b55c-0e473eb7b898",
+    "deploymentUrl": "https://525f9bcb.tamalab-sentinel-blacklist.pages.dev",
+    "createdAt": "2026-10-19T04:51:46.842965Z"
+  },
+  {
+    "name": "tamalab-kaseki-excavation",
+    "subdomain": "tamalab-kaseki-excavation.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "db27c537-9ddc-4ed2-bfce-5a3a44bcb37a",
+    "deploymentUrl": "https://db27c537.tamalab-kaseki-excavation.pages.dev",
+    "createdAt": "2026-10-19T04:51:20.144066Z"
+  },
+  {
+    "name": "tamalab-quiz-zukan",
+    "subdomain": "tamalab-quiz-zukan.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "def2467b-f20a-42dc-9fda-652f3a56bf4b",
+    "deploymentUrl": "https://def2467b.tamalab-quiz-zukan.pages.dev",
+    "createdAt": "2026-10-19T04:51:05.712497Z"
+  },
+  {
+    "name": "tamalab-mogumon",
+    "subdomain": "tamalab-mogumon.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "908a689a-20e2-4501-829a-bba386bf59d1",
+    "deploymentUrl": "https://908a689a.tamalab-mogumon.pages.dev",
+    "createdAt": "2026-10-19T04:50:30.945977Z"
+  },
+  {
+    "name": "tamalab-math-marathon",
+    "subdomain": "tamalab-math-marathon.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "4902ea07-fc77-470b-ac61-b0843ae6b6f8",
+    "deploymentUrl": "https://4902ea07.tamalab-math-marathon.pages.dev",
+    "createdAt": "2026-10-19T04:48:35.513556Z"
+  },
+  {
+    "name": "tamalab-indoor-treasure-hunt",
+    "subdomain": "tamalab-indoor-treasure-hunt.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "bc5d9d19-f0bf-4ab3-a167-48b51bce7fd3",
+    "deploymentUrl": "https://bc5d9d19.tamalab-indoor-treasure-hunt.pages.dev",
+    "createdAt": "2026-10-19T04:47:00.028122Z"
+  },
+  {
+    "name": "tamalab-ball-race",
+    "subdomain": "tamalab-ball-race.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "637c21f8-5c24-41b4-94fc-efab3d6b6c63",
+    "deploymentUrl": "https://637c21f8.tamalab-ball-race.pages.dev",
+    "createdAt": "2026-10-19T04:45:24.25068Z"
+  }
+]

@@ -9,7 +9,7 @@
 5. `npm run test:pages` を実行する。
 6. `npm run deploy:pages` を実行する。
 
-公開予定URL: https://tamalab-hub.pages.dev/ （作成・検証前のため未確定）
+公開URL: https://tamalab-hub.pages.dev/
 
 ## 公開範囲と更新
 
@@ -20,5 +20,9 @@
 今回はDirect Upload方式。Pages標準Git連携への後からの切り替えはできないため、自動更新が必要な場合はGitHub Actionsなどから同じデプロイ手順を呼ぶ。認証トークンをリポジトリに保存しない。
 
 旧Vercelサイトは新URLの検証が済むまで維持する。新URLではゲームの保存データは最初からになり、旧URLの保存値は引き継がない。
+
+移行の結果・全アプリのURL・復旧情報はcloudflare-migration-status.mdとcloudflare-url-mapping.jsonに記録している。旧Vercelには移転案内を設置済み。Git連携のある旧プロジェクトはIgnored Build Stepをexit 0へ設定し、Git pushによる再公開を止めている。
+
+旧サイトへ戻す場合のコマンドは `npx vercel@64.5.0 promote <previousDeploymentId> --scope tamas-projects-ba7ff5ed`。IDはcloudflare-url-mapping.jsonで対象サイトと照合する。Gitビルドを再開する場合はVercelのBuild and Deployment設定でIgnored Build Stepを移行前のAutomaticへ戻す。
 
 Wrangler 4.151.1では新規Pages作成時のWorkersへの自動誘導を避けるため、初回のproject createにのみ--forceを付けます。既存Pagesへの更新には不要です。

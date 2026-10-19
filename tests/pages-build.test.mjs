@@ -17,6 +17,8 @@ test('Hub build contains all catalog images and pages, without repository files'
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
   const catalog = JSON.parse(await readFile(join(output, 'apps.json'), 'utf8'));
   assert.equal(catalog.apps.length, 9);
+  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 3);
+  for (const app of catalog.apps) assert.match(app.url, /^https:\/\/tamalab-[a-z-]+\.pages\.dev\/$/);
   for (const app of catalog.apps) await readFile(join(output, app.image));
 });
 

@@ -17,7 +17,7 @@ Cloudflareは新規サイトにWorkersを推奨しているが、ユーザーが
 | サイト名 | ローカルの候補 | 配信方法 |
 | --- | --- | --- |
 | hub | D:/work/web-app-hub | HTML・CSS・JS・apps.json・公開画像を専用出力先へコピー |
-| sock-pair | ソースの所在を追加調査。Persa27/sock-pairの既定ブランチにはREADME.mdのみ | ソースと現行デプロイ構成を特定後、公開出力を作成 |
+| sock-pair | D:/work-godot/sock-pair（調査後に現行ソースを確認） | Godot4.7.2のWebリリース。WASMは可逆圧縮し、生成ローダーで展開 |
 | chimo-race | D:/work/chimo-race | npm run buildで生成するdist |
 | ball-race | D:/work/ball-race | npm run buildで生成するdist |
 | mogumon | D:/work/mogumon/public | public内の実行に必要なファイル |
@@ -33,6 +33,8 @@ Cloudflareは新規サイトにWorkersを推奨しているが、ユーザーが
 
 各リポジトリに再現可能な公開手順とWrangler設定を置く。リポジトリ全体を静的アセットの配信元に指定しない。秘密情報、.env、.git、node_modules、制作素材、テスト、販促動画などを公開出力から除外する。既存の未コミット変更を維持し、移行用の変更だけを区別して扱う。
 
+実装時の補足: 設定だけでは現行の公開元HTMLや画像をclone後に復元できないサイトがあったため、公開に必要な現行ファイルだけを専用ブランチへスナップショット保存した。制作途中の変更は巻き込まない。チモと靴下は.pages-release、他サイトは.pages-distを配信する。靴下はWASMをindex.wasm.gzへ可逆圧縮し、生成JSの読み込み1箇所だけでDecompressionStreamを使う。CDNの自動圧縮と競合するContent-Encodingの手動指定はしない。
+
 AR宝さがしのvercel.jsonにあるCSP、Permissions-Policy、その他セキュリティヘッダーをCloudflareの_headersへ移す。化石発掘のルートURLからHTMLへの書き換えは、公開物の配置・相対パスを確認した上で同じ動作を再現する。SPAフォールバックは実際にルーティングを必要とするアプリに限定する。
 
 公開出力に対してファイル数・単一ファイル容量の制限を確認する。一次調査ではHub画像、モグモン、クイズ画像、チモ、さんすうのpublic内に25MiBを超えるファイルは見つかっていない。最終判定はビルド後に全サイトで行う。
@@ -45,6 +47,8 @@ AR宝さがしのvercel.jsonにあるCSP、Permissions-Policy、その他セキ�
 4. 検証済みアプリの実在するURLだけをapps.jsonなどの有効な参照へ反映する。過去のリリース記録にあるURLは履歴として維持する。
 5. 最後にHubを公開し、全カードとカテゴリ表示を確認する。
 6. 旧Vercel側の移転案内・リダイレクトは、新URLでの確認完了後に導入する。旧セーブが自動移行されないことを案内する。旧プロジェクトの削除やVercel契約の解約は今回行わない。
+
+実装結果: 旧URLは保存データについて明記した案内ページにした。Git連携のある旧VercelプロジェクトはIgnored Build Stepをexit 0に設定し、Git pushで旧ゲームが再公開されるのを防いだ。元の値と復旧用デプロイIDを記録した。
 
 初回はWranglerによるDirect Uploadを利用する。デプロイ時点のスナップショットとコマンドを記録し、更新を再実行できるようにする。Direct Uploadで作成したプロジェクトは後からPages標準のGit連携方式へ切り替えられないため、継続デプロイを追加する場合はGitHub Actionsなどから同じアップロード手順を実行する。初回移行では自動デプロイを追加せず、その点を完了報告に明記する。
 
