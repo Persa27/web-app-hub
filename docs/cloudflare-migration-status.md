@@ -14,7 +14,7 @@
 | AR宝さがし | https://tamalab-indoor-treasure-hunt.pages.dev/ | 起動、HTTPS、CSP・Permissions-Policyほか既存ヘッダーとの一致 |
 | 化石発掘 | https://tamalab-kaseki-excavation.pages.dev/ | 標本選択、発掘台表示、共有URLのテスト |
 | さんすうマラソン | https://tamalab-math-marathon.pages.dev/ | スタート、レースと問題表示 |
-| なまえあてクイズ | https://tamalab-quiz-zukan.pages.dev/ | ジャンル・問題数選択、出題画像、全1,023問の画像ファイル存在 |
+| なまえあてクイズ | https://tamalab-quiz-zukan.pages.dev/ | ジャンル・問題数選択、5問完走、実績保存と再読み込み、全1,023問の画像ファイル存在 |
 | SENTINEL | https://tamalab-sentinel-blacklist.pages.dev/ | 監視開始、カメラ画面とゲーム進行 |
 
 全10サイトのトップページはHTTP 200、存在しない資産は404。旧10サイトの案内は正しい新URLと保存データを引き継がない説明を含む。旧Hubのプライバシーポリシーも維持している。
@@ -32,7 +32,7 @@
 - SENTINELの旧VercelプロジェクトはrootDirectoryがdeploy/sentinel-blacklistのため、設定を変えず案内側のディレクトリ構造を合わせた。
 - 最初の旧案内4件に混ざったCLI実行ログは.vercelignoreを追加して再配信し、旧10サイト全件でログが取得されないことを確認した。
 - Git連携のある旧Vercel 8プロジェクトはIgnored Build Stepをexit 0へ設定し、Git pushで旧ゲームが再公開されるのを防いだ。元の設定はURL対応表に記録。
-- カットバランスはカタログ外のnoscriptリンクにだけ存在するため、今回の9アプリには追加せず、その旧リンクを維持した。
+- カットバランスはカタログ外のnoscriptリンクにだけ存在するため、利用者の指定どおり今回の9アプリには追加せず、その旧リンクを維持した。
 
 ## 検証と記録
 
@@ -63,3 +63,5 @@
 - ブラウザのスマホ幅で確認したが、全ゲームの実機・Safari・長時間プレイを網羅した検証ではない。
 - 新URLでは保存データを最初から開始する。旧URLの保存値には触れていない。
 - ソースのGit pushやmainへのマージは行っていない。
+
+最終ブラウザ確認: 旧Hubの案内ボタンから新Hubへ遷移。靴下は390px幅で起動・ドラッグ操作にコンソールエラーなし。クイズは5問全問正解後の金メダル実績がリロード後も保持されることを確認。テスト用ブラウザとローカルHTTPサーバーは終了した。
