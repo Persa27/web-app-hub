@@ -6,18 +6,18 @@ Vercelで公開しているtamalabのHubと、apps.jsonに登録された9アプ
 
 ## 公開構成
 
-Cloudflare Workers Static AssetsでHubと9アプリをそれぞれ独立して公開する。静的ファイルを直接配信し、今回の移行のためのAPIやデータベースは追加しない。
+Cloudflare PagesでHubと9アプリをそれぞれ独立して公開する。静的ファイルを直接配信し、今回の移行のためのAPIやデータベースは追加しない。
 
-URLの形式は `https://<サイト名>.<Cloudflareアカウントのサブドメイン>.workers.dev/` とする。Hubのサイト名は `tama-lab`、アプリは下表の名前を使用する方針とし、実際のアカウント・名前の使用可否を確認してからURLを確定する。未確認のURLをHubへ書き込まない。
+URLの形式は `https://<Pagesプロジェクト名>.pages.dev/` とする。Hubは `tamalab-hub`、各アプリは下表の名前に `tamalab-` を付けたプロジェクト名とする。実際のアカウント・名前の使用可否を確認してからURLを確定する。名前が利用できない場合は勝手に別名へ変更せず報告する。未確認のURLをHubへ書き込まない。
 
-選択肢としてPagesの無料ドメインも使えるが、Cloudflareの現行ドキュメントが新規サイトにWorkersを推奨しているためWorkersを選ぶ。1サイト内のサブパスに全アプリを集約する案は、アセットの絶対パスや保存領域の干渉への対応が増えるため採用しない。
+Cloudflareは新規サイトにWorkersを推奨しているが、ユーザーが希望する短い無料URLに合わせてPagesを選ぶ。ブランチのプレビューURLを本番URLの代用にしない。1サイト内のサブパスに全アプリを集約する案は、アセットの絶対パスや保存領域の干渉への対応が増えるため採用しない。
 
 ## 移行対象と配信元
 
 | サイト名 | ローカルの候補 | 配信方法 |
 | --- | --- | --- |
-| tama-lab | D:/work/web-app-hub | HTML・CSS・JS・apps.json・公開画像を専用出力先へコピー |
-| sock-pair | ソースの所在を追加調査 | ソースと現行デプロイ構成を特定後、公開出力を作成 |
+| hub | D:/work/web-app-hub | HTML・CSS・JS・apps.json・公開画像を専用出力先へコピー |
+| sock-pair | ソースの所在を追加調査。Persa27/sock-pairの既定ブランチにはREADME.mdのみ | ソースと現行デプロイ構成を特定後、公開出力を作成 |
 | chimo-race | D:/work/chimo-race | npm run buildで生成するdist |
 | ball-race | D:/work/ball-race | npm run buildで生成するdist |
 | mogumon | D:/work/mogumon/public | public内の実行に必要なファイル |
@@ -39,14 +39,14 @@ AR宝さがしのvercel.jsonにあるCSP、Permissions-Policy、その他セキ�
 
 ## 公開と切り替え
 
-1. Cloudflareの認証と対象アカウント、workers.devのサブドメインを確認する。認証操作が必要ならユーザーへ具体的な手順を案内する。認証情報をドキュメントやリポジトリに保存しない。
+1. Cloudflareの認証と対象アカウント、Pagesのプロジェクト名を確認する。認証操作が必要ならユーザーへ具体的な手順を案内する。認証情報をドキュメントやリポジトリに保存しない。2026-10-19のWrangler whoamiでは未認証だった。
 2. 各アプリの設定と公開出力を作り、ローカル検証後にCloudflareで公開する。
 3. 公開先のHTTP応答とブラウザ動作を確認する。
 4. 検証済みアプリの実在するURLだけをapps.jsonなどの有効な参照へ反映する。過去のリリース記録にあるURLは履歴として維持する。
 5. 最後にHubを公開し、全カードとカテゴリ表示を確認する。
 6. 旧Vercel側の移転案内・リダイレクトは、新URLでの確認完了後に導入する。旧セーブが自動移行されないことを案内する。旧プロジェクトの削除やVercel契約の解約は今回行わない。
 
-デプロイ時点のスナップショットとコマンドを記録し、更新を再実行できるようにする。Git連携による継続デプロイが未設定の場合は、その点を完了報告に明記する。
+初回はWranglerによるDirect Uploadを利用する。デプロイ時点のスナップショットとコマンドを記録し、更新を再実行できるようにする。Direct Uploadで作成したプロジェクトは後からPages標準のGit連携方式へ切り替えられないため、継続デプロイを追加する場合はGitHub Actionsなどから同じアップロード手順を実行する。初回移行では自動デプロイを追加せず、その点を完了報告に明記する。
 
 ## 検証・復旧
 
@@ -61,7 +61,7 @@ AR宝さがしのvercel.jsonにあるCSP、Permissions-Policy、その他セキ�
 ## 参照したCloudflare公式資料
 
 - https://developers.cloudflare.com/pages/
-- https://developers.cloudflare.com/workers/static-assets/
-- https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/
-- https://developers.cloudflare.com/workers/static-assets/headers/
-- https://developers.cloudflare.com/workers/static-assets/redirects/
+- https://developers.cloudflare.com/pages/get-started/direct-upload/
+- https://developers.cloudflare.com/pages/platform/limits/
+- https://developers.cloudflare.com/pages/configuration/headers/
+- https://developers.cloudflare.com/pages/configuration/redirects/
