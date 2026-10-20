@@ -143,6 +143,22 @@
         "ひとりで"
       ],
       "note": "スマホはたて向きで。タブレット・パソコンのブラウザでもあそべます"
+    },
+    {
+      "id": "triad-io",
+      "status": "development",
+      "categories": ["adventure"],
+      "name": "TRIAD.io",
+      "kana": "とらいあど",
+      "url": "https://tamalab-triad-io.pages.dev/",
+      "image": "img/thumbnails/gameplay/triad-io.webp",
+      "imageAlt": "TRIAD.io。火・水・草のキャラクターと実際の対戦画面、「三すくみで、大きくなれ！」",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "blue",
+      "description": "火・水・草から属性を選び、相性を活かしてエネルギーを集めよう。大きく成長しながら、100人対戦で1位をめざすアクションゲーム。",
+      "tags": ["三すくみ", "成長バトル", "ひとりで"],
+      "note": "スマホは画面上のスティックとダッシュ、パソコンはマウス・キーボードであそべます"
     }
   ]
 }

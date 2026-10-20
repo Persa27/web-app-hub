@@ -1,0 +1,26 @@
+{
+  "appId": "triad-io",
+  "status": "development",
+  "asset": "img/thumbnails/gameplay/triad-io.webp",
+  "generatedBy": "built-in image_gen",
+  "generatedAt": "2026-10-20T23:40:24Z",
+  "sourceImages": [
+    {
+      "path": "D:/work/triad.io/output/triad-v0.8-gameplay.png",
+      "role": "Authentic TRIAD.io v0.8 gameplay and game-visual reference"
+    },
+    {
+      "path": "img/thumbnails/gameplay/mogumon.webp",
+      "role": "web-app-hub composition and finish reference only"
+    }
+  ],
+  "generatedOriginal": "C:/Users/coil7/.codex/generated_images/01a15b95-d250-73c0-92f9-d5d780abb2b6/exec-ef0e51b6-4826-4867-a809-5db0c3d1b88c.png",
+  "export": {
+    "format": "WEBP",
+    "width": 1200,
+    "height": 800,
+    "quality": 88,
+    "resampling": "Lanczos"
+  },
+  "prompt": "Use case: compositing\nAsset type: web-app-hub game thumbnail, landscape 3:2\nPrimary request: create one polished promotional thumbnail for the development game TRIAD.io, using the real gameplay and the hub's established thumbnail composition.\nInput images: Image 1: authentic TRIAD.io v0.8 gameplay screenshot and source for all game visuals; Image 2: existing web-app-hub thumbnail used only as a layout and finish reference. Do not copy Image 2's character, landscape, or wording.\nScene/backdrop: use the deep navy-blue arena and subtle grid from Image 1 as the full background.\nSubject: on the left, three enlarged, friendly round elemental game characters matching TRIAD.io's actual circular avatar design and palette: fire (orange/red), water (cyan/blue), and grass (green). Keep their design simple and faithful to the game, without props, costumes, or extra effects. On the right, show an inset of the actual gameplay from Image 1, retaining its real arena, HUD, and leaderboard. The screenshot inset must remain recognizable as the genuine game screen, not a fabricated interface.\nStyle/medium: polished 2D game thumbnail, crisp and cheerful, matching the hub reference's clean promotional style, not 3D.\nComposition/framing: 3:2 horizontal canvas. Enlarged elemental characters grouped on the left; clear rounded screenshot inset on the right; a wide soft-white rounded caption strip across the bottom, following the reference's hierarchy. Keep all important content inside safe margins.\nColor palette: retain the game's navy, cyan, gold, orange, and green accents; dark navy lettering on the pale caption strip.\nText (verbatim): main caption 「三すくみで、大きくなれ！」; small app-name chip 「TRIAD.io」. Render each exactly once, legibly, with rounded bold Japanese sans-serif lettering; no other text outside the authentic screenshot inset.\nConstraints: use Image 1 for authentic game visuals; preserve the screenshot inset's real game identity and UI; use Image 2 only for composition/layout polish; no unrelated game elements.\nAvoid: invented controls, device frame, play button, extra characters, extra text, altered or misspelled caption, copied Mogumon character or landscape, logos other than the exact app-name chip, watermark."
+}
