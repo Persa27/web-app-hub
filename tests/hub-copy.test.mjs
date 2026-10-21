@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 
@@ -40,4 +40,15 @@ test("bothHubModesProvideTheSameKeys", async () => {
   assert.equal(HUB_COPY.children.modeChildrenButton, "こどもむけ");
   assert.equal(HUB_COPY.all.modeAllButton, "すべて表示");
   assert.equal(HUB_COPY.all.modeChildrenButton, "子ども向け表示");
+});
+
+test("privacyDisclosureRotatesOnlyItsDecorativeIcon", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../style.css", import.meta.url), "utf8");
+  const summary = html.match(/<details class="parent-details">[\s\S]*?<summary>([\s\S]*?)<\/summary>/)?.[1] ?? "";
+
+  assert.match(summary, /<span class="privacy-summary-label" data-hub-copy="privacySummary">/);
+  assert.match(summary, /<span class="privacy-summary-icon" aria-hidden="true">/);
+  assert.match(css, /\.parent-details\[open\]\s+summary\s+\.privacy-summary-icon\s*\{\s*transform:\s*rotate\(45deg\);/);
+  assert.doesNotMatch(css, /\.parent-details\[open\]\s+summary\s+span\s*\{/);
 });

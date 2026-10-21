@@ -1,4 +1,7 @@
+export const DEFAULT_SORT_MODE = "updated-uploaded-views-desc";
+
 const SORT_MODES = new Set([
+  DEFAULT_SORT_MODE,
   "featured",
   "uploaded-desc",
   "uploaded-asc",
@@ -29,9 +32,33 @@ function validCount(value) {
   return Number.isSafeInteger(value) && value >= 0 ? value : null;
 }
 
-export function sortApps(apps, sortMode = "featured", pageViews = {}) {
+export function sortApps(apps, sortMode = DEFAULT_SORT_MODE, pageViews = {}) {
   const mode = SORT_MODES.has(sortMode) ? sortMode : "featured";
   if (mode === "featured") return [...apps];
+
+  if (mode === "updated-uploaded-views-desc") {
+    return apps
+      .map((app, index) => ({ app, index }))
+      .sort(({ app: left, index: leftIndex }, { app: right, index: rightIndex }) => {
+        const updatedComparison = compareKnownValues(
+          dateValue(left.updatedAt),
+          dateValue(right.updatedAt),
+          -1,
+        );
+        const uploadedComparison = updatedComparison || compareKnownValues(
+          dateValue(left.uploadedAt),
+          dateValue(right.uploadedAt),
+          -1,
+        );
+        const viewsComparison = uploadedComparison || compareKnownValues(
+          validCount(pageViews?.[left.id]),
+          validCount(pageViews?.[right.id]),
+          -1,
+        );
+        return viewsComparison || leftIndex - rightIndex;
+      })
+      .map(({ app }) => app);
+  }
 
   const [field, directionName] = mode.split("-");
   const direction = directionName === "asc" ? 1 : -1;

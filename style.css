@@ -1097,12 +1097,12 @@ a.app-cover:is(:hover, :focus-visible) .app-shot img {
 .parent-details summary::-webkit-details-marker {
   display: none;
 }
-.parent-details summary span {
+.parent-details summary .privacy-summary-icon {
   display: inline-block;
   font-size: 18px;
   transition: transform 0.2s;
 }
-.parent-details[open] summary span {
+.parent-details[open] summary .privacy-summary-icon {
   transform: rotate(45deg);
 }
 .parent-details > div {

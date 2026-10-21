@@ -27,6 +27,33 @@ function app(id, uploadedAt, updatedAt) {
   return { id, uploadedAt, updatedAt };
 }
 
+test("sortsUpdatedDateThenUploadedDateThenPageViewsDescending", async () => {
+  const { sortApps } = await loadSortModule();
+  const apps = [
+    app("a", "2025-06-01", "2025-03-01"),
+    app("b", "2025-05-01", "2025-03-01"),
+    app("c", "2025-05-01", "2025-03-01"),
+    app("d", "2025-12-01", "2025-02-28"),
+  ];
+  const pageViews = { a: 1, b: 40, c: 90, d: 1000 };
+
+  assert.deepEqual(
+    sortApps(apps, "updated-uploaded-views-desc", pageViews).map(item => item.id),
+    ["a", "c", "b", "d"],
+  );
+  assert.deepEqual(
+    sortApps(apps, undefined, pageViews).map(item => item.id),
+    ["a", "c", "b", "d"],
+  );
+});
+
+test("defaultsToDescendingMetadataPriorityInHubSelector", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  const options = html.match(/<select id="catalog-sort">([\s\S]*?)<\/select>/)?.[1] ?? "";
+
+  assert.match(options, /<option value="updated-uploaded-views-desc" selected>/);
+});
+
 test("sortsEachFieldInBothDirections", async () => {
   const { sortApps } = await loadSortModule();
   const apps = [
@@ -56,7 +83,7 @@ test("keepsCatalogOrderForTies", async () => {
   ];
   const pageViews = { first: 10, second: 10, third: 10 };
 
-  for (const mode of ["uploaded-desc", "uploaded-asc", "updated-desc", "updated-asc", "views-desc", "views-asc"]) {
+  for (const mode of ["uploaded-desc", "uploaded-asc", "updated-desc", "updated-asc", "views-desc", "views-asc", "updated-uploaded-views-desc"]) {
     assert.deepEqual(sortApps(apps, mode, pageViews).map(item => item.id), ["first", "second", "third"]);
   }
 });

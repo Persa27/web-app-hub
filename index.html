@@ -17,8 +17,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=catalog-metadata" />
-    <script type="module" src="main.js?v=catalog-metadata"></script>
+    <link rel="stylesheet" href="style.css?v=hub-audience-modes" />
+    <script type="module" src="main.js?v=catalog-default-sort"></script>
   </head>
   <body class="home">
     <a class="skip-link" href="#playground" data-hub-copy="skipLink">作品一覧へ移動</a>
@@ -105,6 +105,7 @@
             <label class="sort-control" for="catalog-sort">
               <span data-hub-copy="sortLabel">表示順を指定</span>
               <select id="catalog-sort">
+                <option value="updated-uploaded-views-desc" selected>更新日→アップロード日→アクセス数（降順）</option>
                 <option value="featured">おすすめ順</option>
                 <option value="uploaded-desc">アップロード日が新しい順</option>
                 <option value="uploaded-asc">アップロード日が古い順</option>
@@ -201,8 +202,8 @@
           </p>
           <details class="parent-details">
             <summary>
-              <span data-hub-copy="privacySummary">お問い合わせ・プライバシーポリシー</span>
-              <span aria-hidden="true">＋</span>
+              <span class="privacy-summary-label" data-hub-copy="privacySummary">お問い合わせ・プライバシーポリシー</span>
+              <span class="privacy-summary-icon" aria-hidden="true">＋</span>
             </summary>
             <div>
               <p>
