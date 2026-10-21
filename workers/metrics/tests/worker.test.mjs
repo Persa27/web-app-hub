@@ -204,6 +204,57 @@ test("rejectsDisallowedOrigin", async () => {
   assert.equal(storageByAppId.size, 0);
 });
 
+test("rejectsAnAppClaimingAnotherAppIdAndHubWritesWithoutIncrementing", async () => {
+  const { worker, env, storageByAppId } = await createWorker();
+  const crossApp = await worker.fetch(
+    postPageView(APP_ORIGIN, JSON.stringify({ appId: "chimo" })),
+    env,
+  );
+  const hubWrite = await worker.fetch(
+    postPageView(HUB_ORIGIN, JSON.stringify({ appId: "sock-pair" })),
+    env,
+  );
+
+  assert.equal(crossApp.status, 403);
+  assert.equal(crossApp.headers.get("access-control-allow-origin"), APP_ORIGIN);
+  assert.equal(hubWrite.status, 403);
+  assert.equal(storageByAppId.size, 0);
+});
+
+test("rejectsAppAndHostileOriginsWhenReadingTotals", async () => {
+  const { worker, env, storageByAppId } = await createWorker();
+  for (const origin of [APP_ORIGIN, "https://attacker.example"]) {
+    const response = await worker.fetch(new Request("https://metrics.example/api/page-views", {
+      headers: { Origin: origin },
+    }), env);
+
+    assert.equal(response.status, 403);
+    assert.equal(response.headers.get("access-control-allow-origin"), null);
+  }
+  assert.equal(storageByAppId.size, 0);
+});
+
+test("returnsCorsReadable503WhenDurableObjectIsUnavailable", async () => {
+  const { worker, env } = await createWorker();
+  env.PAGE_VIEWS = {
+    idFromName: name => ({ name }),
+    get: () => ({ fetch: async () => new Response("unavailable", { status: 500 }) }),
+  };
+
+  const write = await worker.fetch(
+    postPageView(APP_ORIGIN, JSON.stringify({ appId: "sock-pair" })),
+    env,
+  );
+  const read = await worker.fetch(new Request("https://metrics.example/api/page-views", {
+    headers: { Origin: HUB_ORIGIN },
+  }), env);
+
+  assert.equal(write.status, 503);
+  assert.equal(write.headers.get("access-control-allow-origin"), APP_ORIGIN);
+  assert.equal(read.status, 503);
+  assert.equal(read.headers.get("access-control-allow-origin"), HUB_ORIGIN);
+});
+
 test("answersAllowedPreflightWithoutCounting", async () => {
   const { worker, env, storageByAppId } = await createWorker();
   const response = await worker.fetch(new Request("https://metrics.example/api/page-view", {
