@@ -72,7 +72,7 @@ Hubとカタログ11作品を更新してCloudflare Pagesへ再公開した。Wo
 
 | 対象 | 公開URL（ブランチ別名） | Pages Deployment ID |
 | --- | --- | --- |
-| Hub | https://tamalab.hub-6r8.pages.dev/ | `e2882550-1b9f-4c16-887f-fee302e66501` |
+| Hub | https://tamalab.hub-6r8.pages.dev/ | `f57ca11b-c374-4b22-a2f3-da954e20f825` |
 | シャテポン | https://tamalab.shatepon.pages.dev/ | `8b699110-2b9c-4f5d-9b4e-8e01c49015e3` |
 | 靴下神経衰弱 | https://tamalab.sock-pair.pages.dev/ | `dc25d110-c2ae-48a9-9e03-47ec2e2747d4` |
 | チモレース | https://tamalab.chimo-race.pages.dev/ | `ddaf1c1e-cc60-4e3a-847d-f22d629a75f9` |
@@ -96,3 +96,7 @@ Workerの取得APIをブラウザで失敗させた時も11カードとリンク
 検証: Worker単体13件、Durable Objectのローカル並行計測50件、Hubカタログ7件、Hub Pagesテスト2件、全11アプリのPages出力テストを実行し、すべて通過。モグモンは実ブラウザで計測スクリプト応答を保留し、フード操作と保存状態の初期化が先に完了することも確認した。Hub出力は22ファイル・1.76 MiB。Axe監査ではHubの既存の薄い本文・フィルター色にコントラスト違反1件（4.43:1）が残った。
 
 2026-10-21 21:56 JSTのWorker件数取得: `ballrace` 6、`fossil-excavation` 5、`math-marathon` 6、その他8作品は各4。これらは初回検証後の訪問・再読み込みを含む累計。
+
+2026-10-21 JSTの追加作業: Hubの既定順を更新日降順→アップロード日降順→アクセス数降順へ変更し、複合順のテスト9件・Pages出力テスト2件・Pagesビルドを通過。Deployment IDは`f57ca11b-c374-4b22-a2f3-da954e20f825`。
+
+同日のユーザー依頼による手動カウンター加算: `fossil-excavation` +93、`sock-pair` +76、`chimo` +12、`ballrace` +11、`mogumon` +10、`treasure` +13、`math-marathon` +14、`quiz-zukan` +15、`sentinel-blacklist` +16、`shatepon` +17、`triad-io` +18。加算後は化石発掘100、靴下神経衰弱80、その他14〜22。これは実訪問数を示すものではない。

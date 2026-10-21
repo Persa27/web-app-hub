@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-10-05",
+  "method": "Actual app screenshots captured with the browser. No generated imagery or reconstructed game UI.",
+  "apps": [
+    { "id": "treasure", "source": "https://indoor-treasure-hunt.vercel.app/", "screen": "Start instructions", "processing": "Crop upper 480x480 of 480x800 screen; WebP encoding", "note": "AR play requires a supported Android device; the card explicitly labels this as the start screen." },
+    { "id": "mogumon", "source": "https://mogumon.vercel.app/", "screen": "Feeding screen after one feeding", "processing": "1280x720 resized to 1120x630; WebP encoding" },
+    { "id": "ballrace", "source": "https://ball-race-ivory.vercel.app/", "screen": "Race in progress", "processing": "1280x720 resized to 1120x630; WebP encoding" },
+    { "id": "chimo", "source": "D:/work/chimo-race/dist", "screen": "Initial garden and race preparation", "processing": "1280x720 resized to 1120x630; WebP encoding", "note": "Local build uses the same index-BknOmWI6.js bundle as the published app. Capture server accepts the default name for the initial naming prompt because the browser does not support window.prompt. No gameplay or visual assets changed; the original project and build files are untouched." },
+    { "id": "math-marathon", "source": "https://math-marathon.vercel.app/", "screen": "Race and arithmetic question", "processing": "480x960 portrait screen; WebP encoding" }
+  ]
+}

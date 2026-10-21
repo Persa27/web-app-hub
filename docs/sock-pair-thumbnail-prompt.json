@@ -1,0 +1,17 @@
+{
+  "id": "sock-pair",
+  "generator": "Built-in image_gen",
+  "date": "2026-10-06",
+  "prompt": "Use case: compositing.\nAsset type: ONE landscape 3:2 (1536x1024) promotional thumbnail for the Japanese children's app hub tamalab.\nPrimary request: edit the first attached actual gameplay screenshot of 靴下神経衰弱 into a polished thumbnail that explains finding matching black socks and putting them in the wooden drawer.\nInput images: Image 1 is the actual game screenshot and primary edit target. Image 2 (Mogumon thumbnail) is STYLE REFERENCE ONLY; do not import its creature, meadow, pink accent, or any other game content.\nPreserve the first screenshot's real visual identity: low-poly 3D black socks with subtle gray stripes, diamonds, ribbing and differing lengths; warm wooden floor, cream room wall, woven round laundry basket and small pale wooden chest of three drawers with brass handles and one open drawer. This is screenshot-based graphic design, not an invented game illustration.\nComposition: extend/reframe the real cream room and wooden floor across a spacious landscape. Enlarge two matching original gray-striped black socks from the screenshot in the left foreground, clean cutouts with subtle thin white sticker edges to help people see their matching stripes. Keep their same original 3D knit texture and simple shape; they can be duplicated from the same sock to show a pair. Keep part of the real laundry pile and wooden drawer behind them. A small restrained mint curved arrow points from the pair toward the open drawer as an external explanatory annotation.\nOn the right, include a neat vertical inset showing an authentic crop of the supplied game screenshot with its original pile, basket and chest visible together. Keep actual gameplay content within that inset faithful. Use a soft white/mint rounded frame matching the style-reference screenshot frame; no device mockup. Do not invent colorful socks, characters, hands, new game controls, fake scores, reward objects or imagined screen UI.\nMatch the reference's soft white rounded caption strip across the bottom, deep navy #253454 rounded Japanese lettering, small app-name chip, balanced spacing and restrained accents. Main accent mint #8fcfb6, with warm cream #f7f9fc. Keep top 12% quiet for website category and link overlays. Readable at 350px thumbnail width. No large outer border, play button, CTA, watermark or loud YouTube visual styling.\nText (verbatim): large feature caption \"おなじペアを、みつけよう！\" (one line or two balanced short lines), small app-name chip \"靴下神経衰弱\". These are clearly promotional annotations outside the gameplay inset. No other newly authored text.\nActual socks and game scene must remain recognizable, with details of black sock patterns visible; do not replace the real game graphics with cartoon or clay art.",
+  "sourceImages": [
+    "img/screenshots/sock-pair.png",
+    "img/thumbnails/gameplay/mogumon.webp"
+  ],
+  "generatedOriginal": "C:/Users/coil7/.codex/generated_images/01a106b3-d5c4-77d2-8170-93a3b2b99558/exec-e04a5159-83cb-4b1d-91ee-b87253efbfa0.png",
+  "file": "img/thumbnails/gameplay/sock-pair.webp",
+  "export": {
+    "width": 1200,
+    "height": 800,
+    "quality": 88
+  }
+}

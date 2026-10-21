@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-19",
+  "generator": "Built-in image_gen",
+  "method": "Screenshot-based composition matching existing gameplay thumbnails",
+  "sourceImages": [
+    "D:/work-godot/increment-kids-medal/output/gameplay-update-2026-10-16/gauges.png",
+    "D:/work-godot/increment-kids-medal/assets/toy-rigs/chick-v2/frames/front.png",
+    "D:/work/web-app-hub/img/thumbnails/gameplay/mogumon.webp"
+  ],
+  "generatedOriginal": "C:/Users/coil7/.codex/generated_images/01a1378e-490d-7922-970d-60dbc11ebc0d/exec-ed9c157d-2566-46c3-a722-72a635b42766.png",
+  "file": "img/thumbnails/gameplay/shatepon.webp",
+  "export": {
+    "width": 1200,
+    "height": 800,
+    "format": "WebP",
+    "quality": 88
+  },
+  "prompt": "Create one landscape 3:2 production promotional thumbnail. Images 1 and 2 are the actual Shatepon gameplay and original chick; image 3 is a style reference only. Match the existing hub system: enlarged original yellow chick with red cap and red shoes on the left, authentic shooting gameplay inset on the right, real red-curtain carnival stall background, white sticker edge, soft cream rounded caption strip, dark navy rounded Japanese typography and golden-yellow accent. Keep the upper 12% quiet for site badges. Preserve real game art and controls; no invented creatures or gameplay, no Mogumon content, no device mockup, no play button or watermark. Exact main caption: ねらって、おもちゃゲット！ Exact app-name chip: シャテポン。",
+  "status": "development"
+}

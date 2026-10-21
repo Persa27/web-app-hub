@@ -1,0 +1,10 @@
+{
+  "publishedAt": "2026-10-06",
+  "game": "https://sock-pair.vercel.app/",
+  "hub": "https://tama-lab.vercel.app/",
+  "catalogId": "sock-pair",
+  "category": "learn",
+  "thumbnail": "img/thumbnails/gameplay/sock-pair.png",
+  "thumbnailMethod": "Actual deployed game captured by agent-browser at 1200x800, no image modifications",
+  "verification": "Catalog has six unique IDs, all images load, learn filter shows this game, card opens deployed game in a new tab. Chromium mobile emulation and touch input verified; physical phones and Safari untested."
+}

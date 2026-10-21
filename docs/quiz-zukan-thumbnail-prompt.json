@@ -1,0 +1,17 @@
+{
+  "id": "quiz-zukan",
+  "generator": "Built-in image_gen",
+  "generatedDate": "2026-10-13",
+  "prompt": "Use case: compositing.\nAsset type: ONE polished landscape 3:2 thumbnail, 1536x1024, for the Japanese children's app hub tamalab.\nPrimary request: transform the first attached ACTUAL gameplay screenshot of なまえあてクイズ into a thumbnail showing that children look at a picture and choose its name from four answers. The second image is a STYLE REFERENCE ONLY, the finished Mogumon thumbnail.\nPreserve the first screenshot's actual visual identity: pale cream and mint background, rounded white quiz panel, and the realistic gray rhinoceros picture standing facing slightly right. Use the original rhinoceros picture as the enlarged subject on the left, with a delicate white sticker edge. Keep its original gray skin, pose, horns, feet and realistic picture style. Do not turn it into a cartoon, clay creature, safari character or different animal.\nOn the right, place a neatly framed authentic inset crop of the actual screenshot, showing the real question \"これは なに？\", rhinoceros image, and the exact four original answer buttons arranged as a 2x2 grid: top-left \"サイ\", top-right \"カバ\", bottom-left \"キリン\", bottom-right \"シマウマ\". Copy these labels correctly. Retain the real quiz layout and green/white styling. Simplify tiny peripheral page furniture outside the inset; no invented answers, score, icons, game controls or victory results.\nReframe the original soft mint/cream page background across the landscape with restrained rounded mint shapes and plenty of breathing room. No invented jungle/meadow/game level. Match the second reference's visual system: enlarged original game subject on the left, white rounded screenshot inset with pale accent border on the right, and a large soft-white rounded caption strip along the bottom with dark navy #253454 rounded Japanese lettering, mint #8fcfb6 accent and a small app-name chip. Do not import Mogumon, the meadow, pink palette or any other content from the style reference. Small tasteful mint emphasis marks may echo the reference. Keep the top 12% quiet for website category/link overlays.\nText (verbatim): large feature caption \"みて、なまえをあてよう！\", small app-name chip \"なまえあてクイズ\", a small unobtrusive feature label \"4たくクイズ\" outside the actual-screen inset. Original screenshot text may remain within its inset.\nMake the real four-choice mechanic and original rhinoceros picture immediately recognizable at 350px thumbnail width. Refined editorial balance, cheerful children's appeal, clean typography, no CTA, no play button, no watermark, no device mockup, no loud YouTube styling and no large outer border. Do not pretend the promotional layout is a game screenshot: keep the actual screenshot clearly inset and faithful.",
+  "sourceImages": [
+    "img/screenshots/quiz-zukan.png",
+    "img/thumbnails/gameplay/mogumon.webp"
+  ],
+  "generatedOriginal": "C:/Users/coil7/.codex/generated_images/01a106b3-d5c4-77d2-8170-93a3b2b99558/exec-087424d8-6665-46d6-b0ac-9c8c5b873247.png",
+  "file": "img/thumbnails/gameplay/quiz-zukan.webp",
+  "export": {
+    "width": 1200,
+    "height": 800,
+    "quality": 88
+  }
+}
