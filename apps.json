@@ -83,6 +83,48 @@
       }
     },
     {
+      "id": "vegenetica",
+      "uploadedAt": "2026-10-22",
+      "updatedAt": "2026-10-22",
+      "status": "development",
+      "categories": [
+        "grow",
+        "race"
+      ],
+      "url": "https://tamalab.vegenetica.pages.dev/",
+      "image": "img/thumbnails/gameplay/vegenetica.svg",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "tape": "green",
+      "audience": "general",
+      "copy": {
+        "children": {
+          "name": "ベジネティカ",
+          "kana": "べじねてぃか",
+          "description": "やさいのたねをそだてて、2つをかけあわせて、あたらしいなかまをみつけよう。そだったやさいをやさいせんしゅけんにだして、せかいいちをめざそう！",
+          "tags": [
+            "やさいをそだてる",
+            "こうはいでしんはっけん",
+            "やさいせんしゅけん"
+          ],
+          "imageAlt": "ベジネティカ。きんいろのやさいキャラクターと、やさいをそだててこうはいするゲームのがめん。",
+          "note": "スマホやタブレット、パソコンのブラウザであそべるよ。よこむきがおすすめ。"
+        },
+        "all": {
+          "name": "VEGENETICA",
+          "kana": "べじねてぃか",
+          "description": "野菜を育てて交配し、新しい品種を発見。育った野菜を野菜選手権に出品して優勝を目指す、2D育成・交配ゲームです。",
+          "tags": [
+            "野菜の育成と交配",
+            "品種コレクション",
+            "野菜選手権"
+          ],
+          "imageAlt": "VEGENETICA。金色の野菜と、農園・交配の実際のゲーム画面。",
+          "note": "PC・タブレットのブラウザで遊べます。横長画面を推奨します。"
+        }
+      }
+    },
+    {
       "id": "ballrace",
       "uploadedAt": "2026-10-19",
       "updatedAt": "2026-10-21",

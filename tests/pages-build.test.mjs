@@ -28,8 +28,13 @@ test('Hub build contains all catalog images and pages, without repository files'
   }
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
   const catalog = JSON.parse(await readFile(join(output, 'apps.json'), 'utf8'));
-  assert.equal(catalog.apps.length, 11);
-  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 5);
+  assert.equal(catalog.apps.length, 12);
+  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 6);
+  const vegenetica = catalog.apps.find(app => app.id === 'vegenetica');
+  assert.equal(vegenetica?.status, 'development');
+  assert.equal(vegenetica?.url, 'https://tamalab.vegenetica.pages.dev/');
+  assert.equal(vegenetica?.image, 'img/thumbnails/gameplay/vegenetica.svg');
+  assert.deepEqual([vegenetica?.imageWidth, vegenetica?.imageHeight], [1200, 800]);
   const shatepon = catalog.apps.find(app => app.id === 'shatepon');
   assert.equal(shatepon?.status, 'development');
   assert.equal(shatepon?.url, 'https://tamalab.shatepon.pages.dev/');
