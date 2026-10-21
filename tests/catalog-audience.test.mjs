@@ -4,6 +4,7 @@ import test from "node:test";
 import { DEFAULT_CATALOG_MODE, filterAppsByMode, getAppCopy, normalizeCatalogMode } from "../catalog-audience.js";
 
 const catalogUrl = new URL("../apps.json", import.meta.url);
+const hubHtmlUrl = new URL("../index.html", import.meta.url);
 
 async function loadCatalogApps() {
   const catalog = JSON.parse(await readFile(catalogUrl, "utf8"));
@@ -45,6 +46,20 @@ test("filtersChildModeToChildAndFamilyWithoutMutatingSource", async () => {
   assert.deepEqual(visible.map((app) => app.id), ["child-one", "family-one"]);
   assert.notStrictEqual(visible, apps);
   assert.deepEqual(apps, original);
+});
+
+test("hubAudienceModeControlsDefaultToAllWithAccessibleState", async () => {
+  const html = await readFile(hubHtmlUrl, "utf8");
+  const group = html.match(/<div class="catalog-modes"[^>]*>([\s\S]*?)<\/div>/);
+  assert.ok(group, "catalog mode controls must be present");
+
+  const controls = [...group[1].matchAll(/<button\b(?=[^>]*\bdata-mode="([^"]+)")(?=[^>]*\baria-pressed="(true|false)")[^>]*>/g)]
+    .map(([, mode, pressed]) => ({ mode, pressed }));
+
+  assert.deepEqual(controls, [
+    { mode: "all", pressed: "true" },
+    { mode: "children", pressed: "false" },
+  ]);
 });
 
 test("resolvesModeSpecificCopy", async () => {
