@@ -33,7 +33,7 @@ test('Hub build contains all catalog images and pages, without repository files'
   const vegenetica = catalog.apps.find(app => app.id === 'vegenetica');
   assert.equal(vegenetica?.status, 'development');
   assert.equal(vegenetica?.url, 'https://tamalab.vegenetica.pages.dev/');
-  assert.equal(vegenetica?.image, 'img/thumbnails/gameplay/vegenetica.svg');
+  assert.equal(vegenetica?.image, 'img/thumbnails/gameplay/vegenetica.png');
   assert.deepEqual([vegenetica?.imageWidth, vegenetica?.imageHeight], [1200, 800]);
   const shatepon = catalog.apps.find(app => app.id === 'shatepon');
   assert.equal(shatepon?.status, 'development');
