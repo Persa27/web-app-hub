@@ -16,8 +16,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=0fd8129118" />
-    <script src="main.js?v=38d5308731" defer></script>
+    <link rel="stylesheet" href="style.css?v=catalog-metadata" />
+    <script type="module" src="main.js?v=catalog-metadata"></script>
   </head>
   <body class="home">
     <a class="skip-link" href="#playground">あそびをえらぶところへ</a>
@@ -94,7 +94,21 @@
               <span class="filter-symbol" aria-hidden="true">＋</span>まなぶ
             </button>
           </div>
-          <p class="result-count" id="result-count" role="status"></p>
+          <div class="filter-tools">
+            <label class="sort-control" for="catalog-sort">
+              <span>ならびかえ</span>
+              <select id="catalog-sort">
+                <option value="featured">おすすめ順</option>
+                <option value="uploaded-desc">アップロード日が新しい順</option>
+                <option value="uploaded-asc">アップロード日が古い順</option>
+                <option value="updated-desc">更新日が新しい順</option>
+                <option value="updated-asc">更新日が古い順</option>
+                <option value="views-desc">アクセス数が多い順</option>
+                <option value="views-asc">アクセス数が少ない順</option>
+              </select>
+            </label>
+            <p class="result-count" id="result-count" role="status"></p>
+          </div>
         </div>
         <div class="apps" id="apps" aria-busy="true">
           <p class="loading-message" role="status">あそびをならべています…</p>

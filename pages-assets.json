@@ -2,6 +2,7 @@
   "entries": [
     { "from": "index.html" },
     { "from": "main.js" },
+    { "from": "catalog-sort.js" },
     { "from": "style.css" },
     { "from": "apps.json" },
     { "from": "privacy-quiz-boost.html" },

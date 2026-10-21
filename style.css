@@ -566,6 +566,36 @@ svg {
   font-size: 11px;
   white-space: nowrap;
 }
+.filter-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 9px;
+}
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.sort-control select {
+  max-width: min(100%, 240px);
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 0 34px 0 12px;
+  font: inherit;
+  font-weight: 600;
+}
+.sort-control select:focus-visible {
+  outline: 3px solid #8fa5f0;
+  outline-offset: 2px;
+}
 .apps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -738,6 +768,30 @@ a.app-cover:is(:hover, :focus-visible) .app-shot img {
   font-size: 10px;
   color: #637187;
   font-weight: 500;
+}
+.app-metadata {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+.app-metadata > div {
+  min-width: 0;
+}
+.app-metadata dt {
+  font-size: 9px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.app-metadata dd {
+  margin: 3px 0 0;
+  color: var(--ink);
+  font: 700 12px "DM Sans", "Zen Maru Gothic", sans-serif;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
 }
 .app-note {
   border-top: 1px dashed var(--line);
@@ -1299,11 +1353,17 @@ a.app-cover:is(:hover, :focus-visible) .app-shot img {
     align-items: flex-start;
     gap: 12px;
   }
+  .filter-tools {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
   .filter-button {
     padding-inline: 16px;
   }
   .result-count {
-    align-self: flex-end;
+    align-self: auto;
   }
   .parents {
     grid-template-columns: 1fr;
@@ -1511,6 +1571,22 @@ a.app-cover:is(:hover, :focus-visible) .app-shot img {
     font-size: 14px;
   }
   .result-count {
+    font-size: 10px;
+  }
+  .sort-control {
+    gap: 6px;
+    font-size: 10px;
+  }
+  .sort-control select {
+    max-width: min(62vw, 220px);
+    min-height: 44px;
+    padding-left: 10px;
+    font-size: 11px;
+  }
+  .app-metadata {
+    gap: 6px;
+  }
+  .app-metadata dt {
     font-size: 10px;
   }
   .apps {

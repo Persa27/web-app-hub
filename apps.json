@@ -2,6 +2,8 @@
   "apps": [
     {
       "id": "sock-pair",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "categories": ["learn"],
       "name": "靴下神経衰弱",
       "kana": "くつしたしんけいすいじゃく",
@@ -17,6 +19,8 @@
     },
     {
       "id": "chimo",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "status": "development",
       "categories": ["grow", "race"],
       "name": "チモレース",
@@ -33,6 +37,8 @@
     },
     {
       "id": "ballrace",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "status": "development",
       "categories": ["race"],
       "name": "ボールレース",
@@ -49,6 +55,8 @@
     },
     {
       "id": "mogumon",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "categories": ["grow"],
       "name": "モグモン",
       "kana": "もぐもん",
@@ -64,6 +72,8 @@
     },
     {
       "id": "treasure",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "categories": ["adventure"],
       "name": "AR宝さがし",
       "kana": "えーあーるたからさがし",
@@ -79,6 +89,8 @@
     },
     {
       "id": "fossil-excavation",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "categories": ["adventure"],
       "name": "化石発掘",
       "kana": "かせきはっくつ",
@@ -94,6 +106,8 @@
     },
     {
       "id": "math-marathon",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "status": "development",
       "categories": ["learn", "race"],
       "name": "さんすうマラソン",
@@ -110,6 +124,8 @@
     },
     {
       "id": "quiz-zukan",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "categories": ["learn"],
       "name": "なまえあてクイズ",
       "kana": "なまえあてくいず",
@@ -125,6 +141,8 @@
     },
     {
       "id": "sentinel-blacklist",
+      "uploadedAt": "2026-10-19",
+      "updatedAt": "2026-10-19",
       "categories": [
         "adventure"
       ],
@@ -146,6 +164,8 @@
     },
     {
       "id": "triad-io",
+      "uploadedAt": "2026-10-21",
+      "updatedAt": "2026-10-21",
       "status": "development",
       "categories": ["adventure"],
       "name": "TRIAD.io",

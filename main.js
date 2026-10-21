@@ -1,9 +1,13 @@
 // Add apps and their categories in apps.json; the layout follows the catalog.
+import { formatDate, formatPageViews, loadPageViews, sortApps } from "./catalog-sort.js";
+
 const section = document.getElementById("apps");
 const developmentSection = document.getElementById("development-apps");
 const filterBar = document.getElementById("filter-bar");
 const resultCount = document.getElementById("result-count");
 const filterButtons = [...document.querySelectorAll("[data-filter]")];
+const sortControl = document.getElementById("catalog-sort");
+const METRICS_URL = "https://tamalab-metrics.tamalab.workers.dev";
 const categories = {
   adventure: { label: "ぼうけん" },
   grow: { label: "そだてる" },
@@ -11,6 +15,10 @@ const categories = {
   learn: { label: "まなぶ" },
 };
 let currentFilter = "all";
+let currentSort = "featured";
+let catalogApps = [];
+let pageViews = null;
+let hasRequestedPageViews = false;
 
 function esc(value) {
   return String(value).replace(
@@ -46,6 +54,11 @@ function renderCard(app) {
       <h2 class="app-name" id="title-${esc(app.id)}">${esc(app.name)}</h2>
       <p class="app-desc">${esc(app.description)}</p>
       <ul class="app-tags" aria-label="あそびのとくちょう">${app.tags.map((tag) => `<li>${esc(tag)}</li>`).join("")}</ul>
+      <dl class="app-metadata" aria-label="アプリの情報">
+        <div><dt>アップロード日</dt><dd>${formatDate(app.uploadedAt)}</dd></div>
+        <div><dt>更新日</dt><dd>${formatDate(app.updatedAt)}</dd></div>
+        <div><dt>アクセス数</dt><dd data-page-views="${esc(app.id)}">${formatPageViews(pageViews?.[app.id])}</dd></div>
+      </dl>
       <p class="app-note">${isDeveloping ? "" : '<span class="device-icon" aria-hidden="true"></span>'}<span>${isDeveloping ? "ただいま開発中です。画像をおすと、ためしにあそべます。" : esc(app.note)}</span></p>
     </div>`;
   return card;
@@ -69,6 +82,33 @@ function applyFilter(value) {
   resultCount.textContent = `${visible}このあそび`;
 }
 
+function renderCatalog() {
+  const publishedApps = sortApps(
+    catalogApps.filter((app) => app.status !== "development"),
+    currentSort,
+    pageViews,
+  );
+  const developmentApps = sortApps(
+    catalogApps.filter((app) => app.status === "development"),
+    currentSort,
+    pageViews,
+  );
+  const fragment = document.createDocumentFragment();
+  for (const app of publishedApps) fragment.appendChild(renderCard(app));
+  const coming = document.createElement("aside");
+  coming.className = "coming-card";
+  coming.innerHTML = `<div class="coming-art" aria-hidden="true"><span class="coming-block"></span><span class="coming-ball"></span><span class="coming-spark">✧</span></div><h2>つぎは、どんなあそび？</h2><p>あたらしい「たのしい！」を、<br>すこしずつ、つくっています。</p><span class="coming-label">MORE LITTLE JOYS TO COME</span>`;
+  fragment.appendChild(coming);
+  section.replaceChildren(fragment);
+  const developmentFragment = document.createDocumentFragment();
+  for (const app of developmentApps)
+    developmentFragment.appendChild(renderCard(app));
+  developmentSection.replaceChildren(developmentFragment);
+  document.getElementById("development").hidden = !developmentApps.length;
+  document.getElementById("total-count").textContent = publishedApps.length;
+  applyFilter(currentFilter);
+}
+
 async function render() {
   section.setAttribute("aria-busy", "true");
   filterBar.hidden = true;
@@ -79,26 +119,19 @@ async function render() {
     const { apps } = await response.json();
     if (!Array.isArray(apps) || !apps.length)
       throw new Error("The catalog is empty");
-    const publishedApps = apps.filter((app) => app.status !== "development");
-    const developmentApps = apps.filter(
-      (app) => app.status === "development",
-    );
-    if (!publishedApps.length) throw new Error("The published catalog is empty");
-    const fragment = document.createDocumentFragment();
-    for (const app of publishedApps) fragment.appendChild(renderCard(app));
-    const coming = document.createElement("aside");
-    coming.className = "coming-card";
-    coming.innerHTML = `<div class="coming-art" aria-hidden="true"><span class="coming-block"></span><span class="coming-ball"></span><span class="coming-spark">✧</span></div><h2>つぎは、どんなあそび？</h2><p>あたらしい「たのしい！」を、<br>すこしずつ、つくっています。</p><span class="coming-label">MORE LITTLE JOYS TO COME</span>`;
-    fragment.appendChild(coming);
-    section.replaceChildren(fragment);
-    const developmentFragment = document.createDocumentFragment();
-    for (const app of developmentApps)
-      developmentFragment.appendChild(renderCard(app));
-    developmentSection.replaceChildren(developmentFragment);
-    document.getElementById("development").hidden = !developmentApps.length;
-    document.getElementById("total-count").textContent = publishedApps.length;
+    if (!apps.some((app) => app.status !== "development"))
+      throw new Error("The published catalog is empty");
+    catalogApps = apps;
+    renderCatalog();
     filterBar.hidden = false;
-    applyFilter(currentFilter);
+    if (!hasRequestedPageViews) {
+      hasRequestedPageViews = true;
+      void loadPageViews(METRICS_URL).then((counts) => {
+        if (!counts) return;
+        pageViews = counts;
+        renderCatalog();
+      });
+    }
   } catch {
     section.innerHTML = `<div class="load-error" role="alert"><p>あそびを読みこめませんでした。<br>通信をたしかめて、もういちどためしてね。</p><button class="retry-button" type="button">もういちど読みこむ</button></div>`;
     section.querySelector("button").addEventListener("click", render);
@@ -110,5 +143,10 @@ async function render() {
 for (const button of filterButtons) {
   button.addEventListener("click", () => applyFilter(button.dataset.filter));
 }
+
+sortControl.addEventListener("change", () => {
+  currentSort = sortControl.value;
+  renderCatalog();
+});
 
 render();
