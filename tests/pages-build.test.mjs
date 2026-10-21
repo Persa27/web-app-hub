@@ -11,7 +11,7 @@ test('Hub build contains all catalog images and pages, without repository files'
   assert.equal(result.status, 0, result.stderr);
   const output = join(root, '.pages-dist');
   const files = await readdir(output);
-  for (const file of ['index.html', 'main.js', 'style.css', 'apps.json', 'privacy-quiz-boost.html', '404.html']) {
+  for (const file of ['index.html', 'main.js', 'catalog-audience.js', 'catalog-sort.js', 'hub-copy.js', 'style.css', 'apps.json', 'privacy-quiz-boost.html', '404.html']) {
     assert.ok(files.includes(file), file);
   }
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
