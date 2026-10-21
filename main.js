@@ -83,6 +83,7 @@ function applyFilter(value) {
 }
 
 function renderCatalog() {
+  const focusedAppId = document.activeElement?.closest(".app-card")?.dataset.id;
   const publishedApps = sortApps(
     catalogApps.filter((app) => app.status !== "development"),
     currentSort,
@@ -107,6 +108,11 @@ function renderCatalog() {
   document.getElementById("development").hidden = !developmentApps.length;
   document.getElementById("total-count").textContent = publishedApps.length;
   applyFilter(currentFilter);
+  if (focusedAppId) {
+    const focusedCard = [...document.querySelectorAll(".app-card")]
+      .find((card) => card.dataset.id === focusedAppId);
+    focusedCard?.querySelector(".app-cover")?.focus({ preventScroll: true });
+  }
 }
 
 async function render() {
