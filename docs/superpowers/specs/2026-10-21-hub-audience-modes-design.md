@@ -1,7 +1,7 @@
 # Hub audience modes design
 
 **Date:** 2026-10-21
-**Status:** Conversational design approved; written-spec review pending
+**Status:** Design and written spec approved by the user on 2026-10-21
 
 ## Goal
 
