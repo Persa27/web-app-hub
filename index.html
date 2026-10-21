@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f7f9fc" />
-    <title>tamalab | 子どもアプリひろば</title>
+    <title data-hub-copy="documentTitle">tamalab｜子ども向け・一般向けアプリ一覧</title>
     <meta
       name="description"
-      content="tamalabの子どもアプリひろば。あそんで、そだてて、ちょっとまなんで。ブラウザですぐあそべる、無料・登録不要・広告なしの手づくりアプリ集。"
+      content="tamalabが制作するウェブアプリの一覧。掲載作品は無料、会員登録不要、広告なしでご利用いただけます。"
+      data-hub-attr="content:metaDescription"
     />
     <link rel="icon" href="img/favicon.svg?v=tamalab" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,16 +21,16 @@
     <script type="module" src="main.js?v=catalog-metadata"></script>
   </head>
   <body class="home">
-    <a class="skip-link" href="#playground">あそびをえらぶところへ</a>
+    <a class="skip-link" href="#playground" data-hub-copy="skipLink">作品一覧へ移動</a>
     <header class="site-nav">
       <div class="nav-inner wrap">
-        <a class="brand" href="./" aria-label="tamalab 子どもアプリひろば ホーム">
+        <a class="brand" href="./" aria-label="tamalab アプリ広場 ホーム" data-hub-attr="aria-label:brandAriaLabel">
           <img class="brand-logo" src="img/tamalab-logo.webp" alt="tamalab" width="720" height="217" />
-          <span class="brand-caption">子どもアプリひろば</span>
+          <span class="brand-caption" data-hub-copy="brandCaption">ウェブアプリ広場</span>
         </a>
-        <nav aria-label="メインメニュー">
+        <nav aria-label="メインメニュー" data-hub-attr="aria-label:navigationAriaLabel">
           <a href="#for-parents"
-            >おうちのかたへ <span class="nav-dot" aria-hidden="true"></span
+            ><span data-hub-copy="parentNavigation">保護者・運営者向け</span> <span class="nav-dot" aria-hidden="true"></span
           ></a>
         </nav>
       </div>
@@ -42,24 +43,29 @@
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow section-eyebrow">PICK YOUR PLAY</p>
+            <p class="eyebrow section-eyebrow" data-hub-copy="playgroundEyebrow">APP CATALOG</p>
             <h1 id="playground-title">
-              どれで、あそぶ？<span class="heading-spark" aria-hidden="true"
+              <span data-hub-copy="playgroundTitle">公開作品と開発中の作品</span><span class="heading-spark" aria-hidden="true"
                 >✳</span
               >
             </h1>
           </div>
-          <p class="section-caption">公開中の画像をタップして、あそびにいこう。</p>
+          <p class="section-caption" data-hub-copy="playgroundCaption">各ウェブアプリの概要、対応環境、公開状況をご覧ください。</p>
         </div>
         <div class="filter-bar" id="filter-bar" hidden>
-          <div class="filters" role="group" aria-label="あそびのしゅるい">
+          <div class="filter-choices">
+          <div class="catalog-modes" id="catalog-mode" role="group" aria-label="表示モード" data-hub-attr="aria-label:modeGroupAriaLabel">
+            <button type="button" class="mode-button" data-mode="all" aria-pressed="true" data-hub-copy="modeAllButton">すべて表示</button>
+            <button type="button" class="mode-button" data-mode="children" aria-pressed="false" data-hub-copy="modeChildrenButton">子ども向け表示</button>
+          </div>
+          <div class="filters" role="group" aria-label="作品カテゴリー" data-hub-attr="aria-label:categoryGroupAriaLabel">
             <button
               type="button"
               class="filter-button is-active"
               data-filter="all"
               aria-pressed="true"
             >
-              ぜんぶ <span id="total-count"></span>
+              <span data-hub-copy="categoryAll">全作品</span> <span id="total-count"></span>
             </button>
             <button
               type="button"
@@ -67,7 +73,7 @@
               data-filter="adventure"
               aria-pressed="false"
             >
-              <span class="filter-symbol" aria-hidden="true">✧</span>ぼうけん
+              <span class="filter-symbol" aria-hidden="true">✧</span><span data-hub-copy="categoryAdventure">冒険</span>
             </button>
             <button
               type="button"
@@ -75,7 +81,7 @@
               data-filter="grow"
               aria-pressed="false"
             >
-              <span class="filter-symbol" aria-hidden="true">♧</span>そだてる
+              <span class="filter-symbol" aria-hidden="true">♧</span><span data-hub-copy="categoryGrow">育成</span>
             </button>
             <button
               type="button"
@@ -83,7 +89,7 @@
               data-filter="race"
               aria-pressed="false"
             >
-              <span class="filter-symbol" aria-hidden="true">⚑</span>レース
+              <span class="filter-symbol" aria-hidden="true">⚑</span><span data-hub-copy="categoryRace">競走</span>
             </button>
             <button
               type="button"
@@ -91,12 +97,13 @@
               data-filter="learn"
               aria-pressed="false"
             >
-              <span class="filter-symbol" aria-hidden="true">＋</span>まなぶ
+              <span class="filter-symbol" aria-hidden="true">＋</span><span data-hub-copy="categoryLearn">学習</span>
             </button>
+          </div>
           </div>
           <div class="filter-tools">
             <label class="sort-control" for="catalog-sort">
-              <span>ならびかえ</span>
+              <span data-hub-copy="sortLabel">表示順を指定</span>
               <select id="catalog-sort">
                 <option value="featured">おすすめ順</option>
                 <option value="uploaded-desc">アップロード日が新しい順</option>
@@ -107,15 +114,15 @@
                 <option value="views-asc">アクセス数が少ない順</option>
               </select>
             </label>
-            <p class="result-count" id="result-count" role="status"></p>
+            <p class="result-count" id="result-count" role="status" data-hub-copy="resultCount"></p>
           </div>
         </div>
         <div class="apps" id="apps" aria-busy="true">
-          <p class="loading-message" role="status">あそびをならべています…</p>
+          <p class="loading-message" role="status" data-hub-copy="loadingMessage">作品情報を読み込んでいます…</p>
         </div>
         <noscript
           ><div class="fallback-links">
-            <p>ここからアプリをひらいてね。</p>
+            <p>JavaScriptが無効な場合は、以下から作品を開いてください。</p>
             <a href="https://tamalab-indoor-treasure-hunt.pages.dev/"
               >AR宝さがし（ARCore対応Android・Chrome専用）</a
             ><a href="https://tamalab-mogumon.pages.dev/">モグモン</a
@@ -131,7 +138,7 @@
         >
         <p class="playground-note">
           <span aria-hidden="true">↗</span>
-          公開中のアプリは、画像をタップするとあたらしいタブであそべます。
+          <span data-hub-copy="playgroundNote">公開中の作品は画像を選ぶと新しいタブで開きます。</span>
         </p>
       </section>
       <section
@@ -142,32 +149,32 @@
       >
         <div class="development-heading">
           <div>
-            <p class="eyebrow">IN DEVELOPMENT</p>
-            <h2 id="development-title">開発中のアプリ</h2>
+            <p class="eyebrow" data-hub-copy="developmentEyebrow">IN DEVELOPMENT</p>
+            <h2 id="development-title" data-hub-copy="developmentTitle">開発中のアプリ</h2>
           </div>
-          <p>あたらしいあそびを、ただいま準備中です。</p>
+          <p data-hub-copy="developmentDescription">新作の企画・制作を継続しています。</p>
         </div>
         <div class="apps development-apps" id="development-apps"></div>
       </section>
-      <div class="promise-strip wrap" aria-label="ひろばのおやくそく">
+      <div class="promise-strip wrap" aria-label="サービスの提供条件" data-hub-attr="aria-label:promiseStripAriaLabel">
         <p>
           <span class="promise-icon" aria-hidden="true">¥<i></i></span
-          >ぜんぶ無料
+          ><span data-hub-copy="promiseFree">すべて無料</span>
         </p>
         <span class="promise-divider" aria-hidden="true"></span>
         <p>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M8 5H5v14h14v-3M12 4h8v8m-1-7L9 15" /></svg
-          >登録いらず
+          ><span data-hub-copy="promiseNoAccount">会員登録不要</span>
         </p>
         <span class="promise-divider" aria-hidden="true"></span>
         <p>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="m12 3 8 3v6c0 4-8 9-8 9s-8-5-8-9V6Z" />
             <path d="m8 12 3 3 5-6" /></svg
-          >広告なし
+          ><span data-hub-copy="promiseNoAds">広告なし</span>
         </p>
-        <span class="promise-note">あそびたい気持ちがあれば、準備OK。</span>
+        <span class="promise-note" data-hub-copy="promiseNote">登録・広告なしで、各作品をブラウザからご利用いただけます。</span>
       </div>
       <section
         class="parents wrap"
@@ -176,40 +183,38 @@
       >
         <div class="parents-intro">
           <span class="parent-flower" aria-hidden="true">✿</span>
-          <p class="eyebrow">FOR PARENTS</p>
+          <p class="eyebrow" data-hub-copy="parentsEyebrow">FOR PARENTS</p>
           <h2 id="parents-title">
-            いっしょに笑う時間が、<br />すこし増えますように。
+            <span data-hub-copy="parentsTitleLine1">親子で楽しむ時間を、</span><br /><span data-hub-copy="parentsTitleLine2">少しずつ増やすために。</span>
           </h2>
-          <p>おうちのかたへ</p>
+          <p data-hub-copy="parentsLabel">ご利用者・保護者の方へ</p>
         </div>
         <div class="parents-content">
           <p>
-            このひろばは、tamalabがひとつずつつくった、<br
-              class="desktop-break"
-            />子どものための小さなアプリ集です。
+            <span data-hub-copy="parentsIntro">tamalabが企画・制作するウェブアプリのカタログです。</span>
           </p>
           <p>
-            ここで紹介するウェブアプリは、すべて無料。<br />会員登録や広告はありません。お子さまの「やってみたい」を、そばでいっしょに楽しんでいただけたらうれしいです。
+            <span data-hub-copy="parentsDescription">掲載中のウェブアプリはすべて無料で、会員登録や広告はありません。作品の対象年齢や内容をご確認のうえ、ご利用ください。</span>
           </p>
           <p class="device-guidance">
-            アプリごとに使える端末が異なります。<br />あそぶ前に、各アプリの対応端末をご確認ください。
+            <span data-hub-copy="parentsDevices">利用可能な端末と推奨環境は作品ごとに異なります。各作品の案内をご確認ください。</span>
           </p>
           <details class="parent-details">
             <summary>
-              お問い合わせ・プライバシーポリシー
+              <span data-hub-copy="privacySummary">お問い合わせ・プライバシーポリシー</span>
               <span aria-hidden="true">＋</span>
             </summary>
             <div>
               <p>
-                保護者のかたからのお問い合わせ：<br /><a
+                <span data-hub-copy="contactDescription">保護者からのお問い合わせ</span>：<br /><a
                   href="mailto:tama.lab.support@gmail.com"
                   >tama.lab.support@gmail.com</a
                 >
               </p>
               <p>
-                Androidアプリ「クイズラッシュ！さんすう」の<br /><a
+                <span data-hub-copy="quizPrivacyDescription">Androidアプリ「クイズラッシュ！さんすう」の利用に関する情報</span><br /><a
                   href="privacy-quiz-boost.html"
-                  >プライバシーポリシー <span aria-hidden="true">↗</span></a
+                  ><span data-hub-copy="privacyPolicyLink">プライバシーポリシー</span> <span aria-hidden="true">↗</span></a
                 >
               </p>
             </div>
@@ -218,12 +223,12 @@
       </section>
     </main>
     <footer class="site-footer wrap home-footer">
-      <a class="footer-brand" href="./" aria-label="tamalab ホーム">
+      <a class="footer-brand" href="./" aria-label="tamalab ウェブアプリ広場 ホーム" data-hub-attr="aria-label:footerBrandAriaLabel">
         <img class="footer-logo" src="img/tamalab-logo.webp" alt="tamalab" width="720" height="217" />
-        <span>あそびのつづきを、つくろう。</span>
+        <span data-hub-copy="footerBrandCaption">遊びの続きを、制作する。</span>
       </a>
       <p>© 2026 tamalab</p>
-      <a class="back-top" href="#" aria-label="ページのいちばん上へ">↑</a>
+      <a class="back-top" href="#" aria-label="ページ上部へ戻る" data-hub-attr="aria-label:backTopAriaLabel">↑</a>
     </footer>
   </body>
 </html>
