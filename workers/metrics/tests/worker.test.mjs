@@ -5,8 +5,23 @@ import vm from "node:vm";
 import test from "node:test";
 
 const entryUrl = new URL("../src/index.js", import.meta.url);
-const HUB_ORIGIN = "https://tamalab-hub.pages.dev";
-const APP_ORIGIN = "https://tamalab-sock-pair.pages.dev";
+const HUB_ORIGIN = "https://tamalab.hub-6r8.pages.dev";
+const LEGACY_HUB_ORIGIN = "https://tamalab-hub.pages.dev";
+const APP_ORIGIN = "https://tamalab.sock-pair.pages.dev";
+const LEGACY_APP_ORIGIN = "https://tamalab-sock-pair.pages.dev";
+const PAGES_APP_ORIGINS = new Map([
+  ["sock-pair", "https://tamalab.sock-pair.pages.dev"],
+  ["chimo", "https://tamalab.chimo-race.pages.dev"],
+  ["ballrace", "https://tamalab.ball-race.pages.dev"],
+  ["mogumon", "https://tamalab.mogumon.pages.dev"],
+  ["treasure", "https://tamalab.indoor-treasure-hunt.pages.dev"],
+  ["fossil-excavation", "https://tamalab.fossil-excavation.pages.dev"],
+  ["math-marathon", "https://tamalab.math-marathon.pages.dev"],
+  ["quiz-zukan", "https://tamalab.quiz-zukan.pages.dev"],
+  ["sentinel-blacklist", "https://tamalab.sentinel-blacklist.pages.dev"],
+  ["shatepon", "https://tamalab.shatepon.pages.dev"],
+  ["triad-io", "https://tamalab.triad-io.pages.dev"],
+]);
 const APP_IDS = [
   "sock-pair",
   "chimo",
@@ -127,6 +142,34 @@ test("incrementsKnownAppFromAllowedOrigin", async () => {
 
   assert.equal(response.status, 204);
   assert.equal(response.headers.get("access-control-allow-origin"), APP_ORIGIN);
+  assert.equal(storageByAppId.get("sock-pair").get("sock-pair"), 1);
+});
+
+test("acceptsEveryPagesAppAliasForItsCatalogId", async () => {
+  const { worker, env } = await createWorker();
+  const entries = [...PAGES_APP_ORIGINS];
+  const responses = await Promise.all(entries.map(([appId, origin]) =>
+    worker.fetch(postPageView(origin, JSON.stringify({ appId })), env),
+  ));
+
+  assert.deepEqual(responses.map(response => response.status), Array(11).fill(204));
+  for (const [index, response] of responses.entries()) {
+    assert.equal(response.headers.get("access-control-allow-origin"), entries[index][1]);
+  }
+});
+
+test("continuesAcceptingLegacyHubAndAppOrigins", async () => {
+  const { worker, env, storageByAppId } = await createWorker();
+  const increment = await worker.fetch(
+    postPageView(LEGACY_APP_ORIGIN, JSON.stringify({ appId: "sock-pair" })),
+    env,
+  );
+  const stats = await worker.fetch(new Request("https://metrics.example/api/page-views", {
+    headers: { Origin: LEGACY_HUB_ORIGIN },
+  }), env);
+
+  assert.equal(increment.status, 204);
+  assert.equal(stats.status, 200);
   assert.equal(storageByAppId.get("sock-pair").get("sock-pair"), 1);
 });
 

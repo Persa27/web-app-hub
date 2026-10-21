@@ -7,7 +7,7 @@ const filterBar = document.getElementById("filter-bar");
 const resultCount = document.getElementById("result-count");
 const filterButtons = [...document.querySelectorAll("[data-filter]")];
 const sortControl = document.getElementById("catalog-sort");
-const METRICS_URL = "https://tamalab-metrics.tamalab.workers.dev";
+const METRICS_URL = "https://tamalab-metrics.tamalab-hub.workers.dev";
 const categories = {
   adventure: { label: "ぼうけん" },
   grow: { label: "そだてる" },

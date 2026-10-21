@@ -14,21 +14,35 @@ export const APP_IDS = Object.freeze([
   "triad-io",
 ]);
 
-const HUB_ORIGIN = "https://tamalab-hub.pages.dev";
+const HUB_ORIGINS = new Set([
+  "https://tamalab.hub-6r8.pages.dev",
+  "https://tamalab-hub.pages.dev",
+]);
 const APP_ORIGINS = new Map([
+  ["https://tamalab.sock-pair.pages.dev", "sock-pair"],
   ["https://tamalab-sock-pair.pages.dev", "sock-pair"],
+  ["https://tamalab.chimo-race.pages.dev", "chimo"],
   ["https://tamalab-chimo-race.pages.dev", "chimo"],
+  ["https://tamalab.ball-race.pages.dev", "ballrace"],
   ["https://tamalab-ball-race.pages.dev", "ballrace"],
+  ["https://tamalab.mogumon.pages.dev", "mogumon"],
   ["https://tamalab-mogumon.pages.dev", "mogumon"],
+  ["https://tamalab.indoor-treasure-hunt.pages.dev", "treasure"],
   ["https://tamalab-indoor-treasure-hunt.pages.dev", "treasure"],
+  ["https://tamalab.fossil-excavation.pages.dev", "fossil-excavation"],
   ["https://tamalab-kaseki-excavation.pages.dev", "fossil-excavation"],
+  ["https://tamalab.math-marathon.pages.dev", "math-marathon"],
   ["https://tamalab-math-marathon.pages.dev", "math-marathon"],
+  ["https://tamalab.quiz-zukan.pages.dev", "quiz-zukan"],
   ["https://tamalab-quiz-zukan.pages.dev", "quiz-zukan"],
+  ["https://tamalab.sentinel-blacklist.pages.dev", "sentinel-blacklist"],
   ["https://tamalab-sentinel-blacklist.pages.dev", "sentinel-blacklist"],
+  ["https://tamalab.shatepon.pages.dev", "shatepon"],
   ["https://tamalab-shatepon.pages.dev", "shatepon"],
+  ["https://tamalab.triad-io.pages.dev", "triad-io"],
   ["https://tamalab-triad-io.pages.dev", "triad-io"],
 ]);
-const ALLOWED_ORIGINS = new Set([HUB_ORIGIN, ...APP_ORIGINS.keys()]);
+const ALLOWED_ORIGINS = new Set([...HUB_ORIGINS, ...APP_ORIGINS.keys()]);
 const APP_ID_SET = new Set(APP_IDS);
 const JSON_HEADERS = {
   "Cache-Control": "no-store",
@@ -185,7 +199,7 @@ const worker = {
     }
 
     if (url.pathname === "/api/page-views" && request.method === "GET") {
-      if (origin && origin !== HUB_ORIGIN) {
+      if (origin && !HUB_ORIGINS.has(origin)) {
         return errorResponse("Origin not allowed", 403);
       }
       try {

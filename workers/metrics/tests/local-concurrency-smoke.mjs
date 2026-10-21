@@ -11,8 +11,8 @@ const workerRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".
 const repoRoot = path.resolve(workerRoot, "..", "..", "..");
 const configPath = path.join(workerRoot, "wrangler.jsonc");
 const npxCliPath = path.join(path.dirname(process.execPath), "node_modules", "npm", "bin", "npx-cli.js");
-const hubOrigin = "https://tamalab-hub.pages.dev";
-const appOrigin = "https://tamalab-sock-pair.pages.dev";
+const hubOrigin = "https://tamalab.hub-6r8.pages.dev";
+const appOrigin = "https://tamalab.sock-pair.pages.dev";
 
 assert.ok(existsSync(configPath), "metrics Worker config must exist");
 assert.ok(existsSync(npxCliPath), "npm's npx CLI must exist beside Node.js");
