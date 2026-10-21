@@ -16,14 +16,18 @@ test('Hub build contains all catalog images and pages, without repository files'
   }
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
   const catalog = JSON.parse(await readFile(join(output, 'apps.json'), 'utf8'));
-  assert.equal(catalog.apps.length, 10);
-  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 4);
+  assert.equal(catalog.apps.length, 11);
+  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 5);
+  const shatepon = catalog.apps.find(app => app.id === 'shatepon');
+  assert.equal(shatepon?.status, 'development');
+  assert.equal(shatepon?.url, 'https://tamalab.shatepon.pages.dev/');
+  assert.deepEqual([shatepon?.imageWidth, shatepon?.imageHeight], [1200, 800]);
   const triad = catalog.apps.find(app => app.id === 'triad-io');
   assert.equal(triad?.status, 'development');
-  assert.equal(triad?.url, 'https://tamalab-triad-io.pages.dev/');
+  assert.equal(triad?.url, 'https://tamalab.triad-io.pages.dev/');
   assert.equal(triad?.image, 'img/thumbnails/gameplay/triad-io.webp');
   assert.deepEqual([triad?.imageWidth, triad?.imageHeight], [1200, 800]);
-  for (const app of catalog.apps) assert.match(app.url, /^https:\/\/tamalab-[a-z-]+\.pages\.dev\/$/);
+  for (const app of catalog.apps) assert.match(app.url, /^https:\/\/tamalab\.[a-z-]+\.pages\.dev\/$/);
   for (const app of catalog.apps) await readFile(join(output, app.image));
 });
 
