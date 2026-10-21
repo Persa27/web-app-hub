@@ -537,7 +537,7 @@ svg {
   border: 1px solid transparent;
   border-radius: 10px;
   background: transparent;
-  color: var(--muted);
+  color: #626f84;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.4;
