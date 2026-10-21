@@ -5,6 +5,9 @@
   "scripts": {
     "build:pages": "node scripts/build-pages.mjs",
     "test:pages": "node --test tests/pages-build.test.mjs",
+    "test:metrics": "node --test workers/metrics/tests/worker.test.mjs",
+    "test:metrics:local": "node workers/metrics/tests/local-concurrency-smoke.mjs",
+    "deploy:metrics": "npx wrangler@4.151.1 deploy --config workers/metrics/wrangler.jsonc",
     "deploy:pages": "npm run build:pages && npx wrangler@4.151.1 pages deploy .pages-dist --project-name tamalab-hub --branch main --commit-dirty=true"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
+  "name": "tamalab-metrics",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-19",
+  "workers_dev": true,
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "PAGE_VIEWS",
+        "class_name": "PageViewCounter"
+      }
+    ]
+  },
+  "exports": {
+    "PageViewCounter": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  }
+}
