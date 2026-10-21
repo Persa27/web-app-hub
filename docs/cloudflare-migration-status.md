@@ -6,7 +6,7 @@
 
 | 対象 | 本番URL | 検証 |
 | --- | --- | --- |
-| Hub | https://tamalab-hub.pages.dev/ | 9カード、開発中3件、全画像、カテゴリ、390pxで横はみ出しなし |
+| Hub | https://tamalab-hub.pages.dev/ | 12カード、開発中6件、全画像、カテゴリ、390pxで横はみ出しなし |
 | 靴下神経衰弱 | https://tamalab-sock-pair.pages.dev/ | Godot起動完了、スマホ幅表示、WASM可逆一致 |
 | チモレース | https://tamalab-chimo-race.pages.dev/ | 初回命名、起動、保存と再読み込み |
 | ボールレース | https://tamalab-ball-race.pages.dev/ | ボール・ポイント選択、レース開始 |
@@ -100,3 +100,9 @@ Workerの取得APIをブラウザで失敗させた時も11カードとリンク
 2026-10-21 JSTの追加作業: Hubの既定順を更新日降順→アップロード日降順→アクセス数降順へ変更し、複合順のテスト9件・Pages出力テスト2件・Pagesビルドを通過。Deployment IDは`f57ca11b-c374-4b22-a2f3-da954e20f825`。
 
 同日のユーザー依頼による手動カウンター加算: `fossil-excavation` +93、`sock-pair` +76、`chimo` +12、`ballrace` +11、`mogumon` +10、`treasure` +13、`math-marathon` +14、`quiz-zukan` +15、`sentinel-blacklist` +16、`shatepon` +17、`triad-io` +18。加算後は化石発掘100、靴下神経衰弱80、その他14〜22。これは実訪問数を示すものではない。
+
+## 2026-10-22 VegeneticaをHubに追加
+
+HubカタログにVegeneticaを開発中として掲載し、`tamalab-hub`の本番ブランチ`main`へ再デプロイした。Pages Deployment IDは`4f927c65-44c0-4791-adc5-c799d7686fd3`。公開URLの`apps.json`で12作品とVegeneticaのリンクを確認し、サムネイルはHTTP 200。デプロイ固有URLでもカード・説明・リンクを確認した。
+
+以前の`hub`プロジェクトへのプレビュー公開は`tamalab-hub.pages.dev`を更新しないため、`package.json`の`deploy:pages`を`tamalab-hub`の`main`へ修正し、誤った公開先に戻るのを検出するテストを追加した。Pagesテスト4件、カタログテスト19件が通過。

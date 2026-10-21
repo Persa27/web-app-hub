@@ -7,6 +7,12 @@ import { spawnSync } from 'node:child_process';
 import { isApprovedPagesUrl } from '../scripts/pages-url-validation.mjs';
 
 const root = resolve(import.meta.dirname, '..');
+test('Pages deployment targets the canonical production project', async () => {
+  const packageJson = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
+  assert.match(packageJson.scripts['deploy:pages'], /--project-name\s+tamalab-hub\b/);
+  assert.match(packageJson.scripts['deploy:pages'], /--branch\s+main\b/);
+});
+
 test('migrationNoticeUrlValidationAcceptsCurrentPagesAliases', async () => {
   const mapping = JSON.parse(await readFile(join(root, 'docs/cloudflare-url-mapping.json'), 'utf8'));
   const sites = [mapping.hub, ...mapping.apps];
