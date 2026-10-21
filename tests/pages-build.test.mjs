@@ -4,8 +4,20 @@ import { mkdtemp, mkdir, writeFile, readFile, readdir, cp, rm } from 'node:fs/pr
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { isApprovedPagesUrl } from '../scripts/pages-url-validation.mjs';
 
 const root = resolve(import.meta.dirname, '..');
+test('migrationNoticeUrlValidationAcceptsCurrentPagesAliases', async () => {
+  const mapping = JSON.parse(await readFile(join(root, 'docs/cloudflare-url-mapping.json'), 'utf8'));
+  const sites = [mapping.hub, ...mapping.apps];
+
+  for (const site of sites) assert.equal(isApprovedPagesUrl(site.newUrl), true, site.newUrl);
+  assert.equal(isApprovedPagesUrl('https://tamalab-hub.pages.dev/'), true);
+  assert.equal(isApprovedPagesUrl('https://tamalab.hub-6r8.pages.dev/'), true);
+  assert.equal(isApprovedPagesUrl('http://tamalab.hub.pages.dev/'), false);
+  assert.equal(isApprovedPagesUrl('https://tamalab.hub.pages.dev.evil.example/'), false);
+});
+
 test('Hub build contains all catalog images and pages, without repository files', async () => {
   const result = spawnSync(process.execPath, ['scripts/build-pages.mjs'], { cwd: root, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
@@ -27,7 +39,7 @@ test('Hub build contains all catalog images and pages, without repository files'
   assert.equal(triad?.url, 'https://tamalab.triad-io.pages.dev/');
   assert.equal(triad?.image, 'img/thumbnails/gameplay/triad-io.webp');
   assert.deepEqual([triad?.imageWidth, triad?.imageHeight], [1200, 800]);
-  for (const app of catalog.apps) assert.match(app.url, /^https:\/\/tamalab\.[a-z-]+\.pages\.dev\/$/);
+  for (const app of catalog.apps) assert.equal(isApprovedPagesUrl(app.url), true, app.url);
   for (const app of catalog.apps) await readFile(join(output, app.image));
 });
 

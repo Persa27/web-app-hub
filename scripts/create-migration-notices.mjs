@@ -1,11 +1,12 @@
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
+import { isApprovedPagesUrl } from './pages-url-validation.mjs';
 const root = resolve(import.meta.dirname, '..');
 const mapping = JSON.parse(await readFile(join(root, 'docs/cloudflare-url-mapping.json'), 'utf8'));
 const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 for (const site of [{ ...mapping.hub, name: 'tamalab', id: 'hub' }, ...mapping.apps]) {
   if (!site.vercelProjectId || !site.previousDeploymentId) throw new Error(`Missing rollback record: ${site.id}`);
-  if (!/^https:\/\/tamalab-[a-z-]+\.pages\.dev\/$/.test(site.newUrl)) throw new Error(`Unverified URL format: ${site.newUrl}`);
+  if (!isApprovedPagesUrl(site.newUrl)) throw new Error(`Unverified URL format: ${site.newUrl}`);
   const directory = join(root, '.migration-vercel', site.vercelProject);
   await mkdir(join(directory, '.vercel'), { recursive: true });
   await writeFile(join(directory, '.vercelignore'), 'deployment.log\n');
