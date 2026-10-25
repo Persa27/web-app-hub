@@ -112,3 +112,7 @@ HubカタログにVegeneticaを開発中として掲載し、`tamalab-hub`の本
 Cloudflare Pagesに`mono-quest`プロジェクトを作成し、本番ブランチ`main`へデプロイした。公開URLは https://mono-quest.pages.dev/、Deployment IDは`1cc66c66-e557-4e5d-b6ed-83b40888c525`。`proto.html`から`.pages-dist/index.html`を作るビルドを用意し、公開出力にゲーム本体だけを含めた。
 
 HubカタログにMONO QUESTを追加し、`tamalab-hub`の本番ブランチ`main`へ公開した。Deployment IDは`ea86e228-375e-4f24-9e98-58dedf21f467`。公開カタログは13作品を返し、ゲームURLと巨大な剣・盾による自動バトルを強調した3:2サムネイルはいずれもHTTP 200。
+
+## 2026-10-25 Hub案内文更新
+
+検索用説明、子ども向け・保護者向け案内、プライバシー案内を更新し、`tamalab-hub`の本番ブランチ`main`へ再デプロイした。Deployment IDは`4c756318-10af-4c56-afb1-822302bae089`、デプロイURLは https://4c756318.tamalab-hub.pages.dev/。WranglerでProduction環境・`main`ブランチへの公開を確認した。
