@@ -5,8 +5,8 @@
     "productionBranch": "main",
     "deploymentId": "0b1bd9b3-1d0e-4690-86eb-c80f3407f58a",
     "deploymentUrl": "https://0b1bd9b3.tamalab-hub.pages.dev",
-    "latestDeploymentId": "4f927c65-44c0-4791-adc5-c799d7686fd3",
-    "latestDeploymentUrl": "https://4f927c65.tamalab-hub.pages.dev",
+    "latestDeploymentId": "ea86e228-375e-4f24-9e98-58dedf21f467",
+    "latestDeploymentUrl": "https://ea86e228.tamalab-hub.pages.dev",
     "createdAt": "2026-10-19T04:58:12.551526Z"
   },
   {
@@ -80,5 +80,13 @@
     "deploymentId": "637c21f8-5c24-41b4-94fc-efab3d6b6c63",
     "deploymentUrl": "https://637c21f8.tamalab-ball-race.pages.dev",
     "createdAt": "2026-10-19T04:45:24.25068Z"
+  },
+  {
+    "name": "mono-quest",
+    "subdomain": "mono-quest.pages.dev",
+    "productionBranch": "main",
+    "deploymentId": "1cc66c66-e557-4e5d-b6ed-83b40888c525",
+    "deploymentUrl": "https://1cc66c66.mono-quest.pages.dev",
+    "createdAt": "2026-10-25"
   }
 ]

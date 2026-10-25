@@ -106,3 +106,9 @@ Workerの取得APIをブラウザで失敗させた時も11カードとリンク
 HubカタログにVegeneticaを開発中として掲載し、`tamalab-hub`の本番ブランチ`main`へ再デプロイした。Pages Deployment IDは`4f927c65-44c0-4791-adc5-c799d7686fd3`。公開URLの`apps.json`で12作品とVegeneticaのリンクを確認し、サムネイルはHTTP 200。デプロイ固有URLでもカード・説明・リンクを確認した。
 
 以前の`hub`プロジェクトへのプレビュー公開は`tamalab-hub.pages.dev`を更新しないため、`package.json`の`deploy:pages`を`tamalab-hub`の`main`へ修正し、誤った公開先に戻るのを検出するテストを追加した。Pagesテスト4件、カタログテスト19件が通過。
+
+## 2026-10-25 MONO QUESTを新規公開しHubに追加
+
+Cloudflare Pagesに`mono-quest`プロジェクトを作成し、本番ブランチ`main`へデプロイした。公開URLは https://mono-quest.pages.dev/、Deployment IDは`1cc66c66-e557-4e5d-b6ed-83b40888c525`。`proto.html`から`.pages-dist/index.html`を作るビルドを用意し、公開出力にゲーム本体だけを含めた。
+
+HubカタログにMONO QUESTを追加し、`tamalab-hub`の本番ブランチ`main`へ公開した。Deployment IDは`ea86e228-375e-4f24-9e98-58dedf21f467`。公開カタログは13作品を返し、ゲームURLと巨大な剣・盾による自動バトルを強調した3:2サムネイルはいずれもHTTP 200。

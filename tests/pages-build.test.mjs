@@ -34,8 +34,8 @@ test('Hub build contains all catalog images and pages, without repository files'
   }
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
   const catalog = JSON.parse(await readFile(join(output, 'apps.json'), 'utf8'));
-  assert.equal(catalog.apps.length, 12);
-  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 6);
+  assert.equal(catalog.apps.length, 13);
+  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 5);
   const vegenetica = catalog.apps.find(app => app.id === 'vegenetica');
   assert.equal(vegenetica?.status, 'development');
   assert.equal(vegenetica?.url, 'https://tamalab.vegenetica.pages.dev/');
@@ -46,7 +46,7 @@ test('Hub build contains all catalog images and pages, without repository files'
   assert.equal(shatepon?.url, 'https://tamalab.shatepon.pages.dev/');
   assert.deepEqual([shatepon?.imageWidth, shatepon?.imageHeight], [1200, 800]);
   const triad = catalog.apps.find(app => app.id === 'triad-io');
-  assert.equal(triad?.status, 'development');
+  assert.equal(triad?.status, 'published');
   assert.equal(triad?.url, 'https://tamalab.triad-io.pages.dev/');
   assert.equal(triad?.image, 'img/thumbnails/gameplay/triad-io.webp');
   assert.deepEqual([triad?.imageWidth, triad?.imageHeight], [1200, 800]);

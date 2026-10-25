@@ -452,7 +452,7 @@
       "id": "triad-io",
       "uploadedAt": "2026-10-21",
       "updatedAt": "2026-10-21",
-      "status": "development",
+      "status": "published",
       "categories": [
         "adventure"
       ],
@@ -485,6 +485,46 @@
             "100人対戦"
           ],
           "imageAlt": "火・水・草のキャラクターと、TRIAD.ioの対戦画面。",
+          "note": "スマートフォン・タブレット・PCのブラウザで遊べます。"
+        }
+      }
+    },
+    {
+      "id": "mono-quest",
+      "uploadedAt": "2026-10-25",
+      "updatedAt": "2026-10-25",
+      "categories": [
+        "adventure"
+      ],
+      "url": "https://mono-quest.pages.dev/",
+      "image": "img/thumbnails/gameplay/mono-quest.png",
+      "imageWidth": 1536,
+      "imageHeight": 1024,
+      "tape": "blue",
+      "audience": "general",
+      "copy": {
+        "children": {
+          "name": "MONO QUEST",
+          "kana": "ものくえすと",
+          "description": "でっかいけんとたてをそうびしたゆうしゃが、モンスターとじどうでたたかうよ。たたかいをみまもりながらパワーアップをえらんで、32のへやをすすみ、まおうにちょうせんしよう！",
+          "tags": [
+            "じどうバトル",
+            "でっかいけんとたて",
+            "パワーアップをえらぶ"
+          ],
+          "imageAlt": "でっかいけんとたてで、まおうとじどうバトルするゆうしゃのドットえ。",
+          "note": "たたかいはじどうですすむよ。パワーアップをえらんでみまもろう。"
+        },
+        "all": {
+          "name": "MONO QUEST",
+          "kana": "ものくえすと",
+          "description": "巨大な剣と盾を装備した勇者が自動で戦う、モノクロのドット絵オートバトルRPG。戦闘を見守りながら強化を選び、32区画を越えて魔王を目指します。",
+          "tags": [
+            "自動バトル",
+            "巨大な剣と盾",
+            "強化を選ぶ"
+          ],
+          "imageAlt": "巨大な剣と盾で自動バトルをする勇者と魔王のモノクロドット絵。",
           "note": "スマートフォン・タブレット・PCのブラウザで遊べます。"
         }
       }

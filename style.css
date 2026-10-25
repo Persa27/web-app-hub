@@ -411,61 +411,6 @@ svg {
   margin-right: 7px;
   vertical-align: middle;
 }
-.promise-strip {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  gap: 29px;
-  min-height: 75px;
-}
-.promise-strip p {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 12px;
-  white-space: nowrap;
-}
-.promise-strip svg {
-  width: 19px;
-  height: 19px;
-  stroke: var(--blue);
-  stroke-width: 1.5;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  fill: none;
-}
-.promise-icon {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  border: 1.5px solid var(--blue);
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: var(--blue);
-  font:
-    500 13px "DM Sans",
-    sans-serif;
-}
-.promise-icon i {
-  position: absolute;
-  width: 26px;
-  height: 1px;
-  background: var(--blue);
-  transform: rotate(-45deg);
-}
-.promise-divider {
-  width: 1px;
-  height: 14px;
-  background: #dce2ee;
-}
-.promise-note {
-  margin-left: auto;
-  color: var(--muted);
-  font-size: 11px;
-}
 .playground {
   padding-top: 42px;
   padding-bottom: 77px;
@@ -1299,9 +1244,6 @@ a.app-cover:is(:hover, :focus-visible) .app-shot img {
   .parents-intro h2 {
     font-size: 23px;
   }
-  .promise-strip {
-    gap: 20px;
-  }
 }
 @media (max-width: 800px) {
   .wrap {
@@ -1360,14 +1302,6 @@ a.app-cover:is(:hover, :focus-visible) .app-shot img {
   }
   .hero-small {
     max-width: 235px;
-  }
-  .promise-note {
-    display: none;
-  }
-  .promise-strip {
-    justify-content: center;
-    gap: 30px;
-    min-height: 66px;
   }
   .apps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1558,26 +1492,6 @@ a.app-cover:is(:hover, :focus-visible) .app-shot img {
   .scene-footer {
     bottom: -2%;
     font-size: 9px;
-  }
-  .promise-strip {
-    gap: 16px;
-    min-height: 64px;
-  }
-  .promise-strip p {
-    font-size: 10px;
-    gap: 7px;
-  }
-  .promise-strip svg {
-    width: 17px;
-    height: 17px;
-  }
-  .promise-icon {
-    width: 17px;
-    height: 17px;
-    font-size: 11px;
-  }
-  .promise-icon i {
-    width: 22px;
   }
   .playground {
     padding-top: 28px;
