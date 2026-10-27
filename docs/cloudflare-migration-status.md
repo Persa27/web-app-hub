@@ -116,3 +116,7 @@ HubカタログにMONO QUESTを追加し、`tamalab-hub`の本番ブランチ`ma
 ## 2026-10-25 Hub案内文更新
 
 検索用説明、子ども向け・保護者向け案内、プライバシー案内を更新し、`tamalab-hub`の本番ブランチ`main`へ再デプロイした。Deployment IDは`4c756318-10af-4c56-afb1-822302bae089`、デプロイURLは https://4c756318.tamalab-hub.pages.dev/。WranglerでProduction環境・`main`ブランチへの公開を確認した。
+
+## 2026-10-27 開発中アプリのリンク無効化
+
+開発中5作品のリンクをHub上で出力しないよう変更し、公開カタログからも各URLを除外して`tamalab-hub`の本番ブランチ`main`へデプロイした。Deployment IDは`f26d3c44-838b-4414-9e6a-9704d447d826`。本番URLとデプロイ固有URLの両方で、開発中URLが`apps.json`、`main.js`、`index.html`に含まれないことを確認した。
