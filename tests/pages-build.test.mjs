@@ -38,19 +38,22 @@ test('Hub build contains all catalog images and pages, without repository files'
   assert.equal(catalog.apps.filter(app => app.status === 'development').length, 5);
   const vegenetica = catalog.apps.find(app => app.id === 'vegenetica');
   assert.equal(vegenetica?.status, 'development');
-  assert.equal(vegenetica?.url, 'https://tamalab.vegenetica.pages.dev/');
+  assert.equal(vegenetica?.url, undefined);
   assert.equal(vegenetica?.image, 'img/thumbnails/gameplay/vegenetica.png');
   assert.deepEqual([vegenetica?.imageWidth, vegenetica?.imageHeight], [1200, 800]);
   const shatepon = catalog.apps.find(app => app.id === 'shatepon');
   assert.equal(shatepon?.status, 'development');
-  assert.equal(shatepon?.url, 'https://tamalab.shatepon.pages.dev/');
+  assert.equal(shatepon?.url, undefined);
   assert.deepEqual([shatepon?.imageWidth, shatepon?.imageHeight], [1200, 800]);
   const triad = catalog.apps.find(app => app.id === 'triad-io');
   assert.equal(triad?.status, 'published');
   assert.equal(triad?.url, 'https://tamalab.triad-io.pages.dev/');
   assert.equal(triad?.image, 'img/thumbnails/gameplay/triad-io.webp');
   assert.deepEqual([triad?.imageWidth, triad?.imageHeight], [1200, 800]);
-  for (const app of catalog.apps) assert.equal(isApprovedPagesUrl(app.url), true, app.url);
+  for (const app of catalog.apps) {
+    if (app.status === 'development') assert.equal(app.url, undefined, app.id);
+    else assert.equal(isApprovedPagesUrl(app.url), true, app.url);
+  }
   for (const app of catalog.apps) await readFile(join(output, app.image));
 });
 

@@ -46,6 +46,12 @@ await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 for (const entry of entries) await copy(entry.source, entry.destination, entry.name);
 await lstat(resolve(output, 'index.html'));
+const catalogPath = resolve(output, 'apps.json');
+const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
+for (const app of catalog.apps) {
+  if (app.status === 'development') delete app.url;
+}
+await writeFile(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 await writeFile(resolve(output, '404.html'), '<!doctype html><html lang="ja"><meta charset="utf-8"><title>404</title><h1>404</h1><p>ページがみつかりません。</p><a href="/">ホームへ</a></html>\n');
 if (count + 1 > 20000) throw new Error('Pages Free limit exceeded: 20,000 files');
 console.log(`Pages output: ${output} (${count + 1} files, ${(bytes / 1024 / 1024).toFixed(2)} MiB)`);

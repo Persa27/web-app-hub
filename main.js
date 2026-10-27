@@ -82,8 +82,10 @@ function renderCard(app) {
   const categoryKey = CATEGORY_COPY_KEYS[app.categories?.[0]];
   const categoryLabel = hubCopy[categoryKey] || hubCopy.categoryFallback;
   const isDeveloping = app.status === "development";
-  const coverLabel = `${copy.name}${hubCopy.coverAction}`;
-  const coverAttributes = `href="${esc(app.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(coverLabel)}"`;
+  const coverTag = isDeveloping ? "div" : "a";
+  const coverAttributes = isDeveloping
+    ? ""
+    : ` href="${esc(app.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(`${copy.name}${hubCopy.coverAction}`)}"`;
   const card = document.createElement("article");
   card.className = "app-card";
   card.dataset.id = app.id;
@@ -91,10 +93,10 @@ function renderCard(app) {
   card.dataset.categories = (app.categories || []).join(" ");
   card.setAttribute("aria-labelledby", `title-${app.id}`);
   card.innerHTML = `
-    <a class="app-cover" ${coverAttributes}>
+    <${coverTag} class="app-cover"${coverAttributes}>
       <span class="cover-meta"><span class="category-label" aria-hidden="true">${esc(categoryLabel)}</span>${isDeveloping ? `<span class="development-badge">${esc(hubCopy.developmentBadge)}</span>` : '<span class="cover-arrow" aria-hidden="true">↗</span>'}</span>
       <span class="app-shot"><img src="${esc(app.image)}" alt="${esc(copy.imageAlt)}" width="${esc(app.imageWidth)}" height="${esc(app.imageHeight)}" loading="lazy" decoding="async"></span>
-    </a>
+    </${coverTag}>
     <div class="app-text">
       <p class="app-kana">${esc(copy.kana)}</p>
       <h2 class="app-name" id="title-${esc(app.id)}">${esc(copy.name)}</h2>
