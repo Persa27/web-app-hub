@@ -124,3 +124,7 @@ HubカタログにMONO QUESTを追加し、`tamalab-hub`の本番ブランチ`ma
 ## 2026-10-31 MONO QUESTをHubから削除
 
 HubカタログからMONO QUESTを削除し、12作品を含む状態で`tamalab-hub`の本番ブランチ`main`へデプロイした。Deployment IDは`412770ab-166e-4701-a974-056f0cd15ee7`。本番とデプロイ固有URLの`apps.json`に掲載がなく、専用サムネイルも新デプロイでは404となることを確認した。旧サムネイルURLはCloudflareエッジキャッシュからHTTP 200（`CF-Cache-Status: HIT`、7日TTL）で返る状態を確認。キャッシュ回避URLと新デプロイURLはHTTP 404。
+
+## 2026-10-31 BIGBLADE KNIGHTをHubに追加
+
+`https://tama-lab.itch.io/bigblade-knight`を公開作品としてカタログへ追加し、13作品を`tamalab-hub`の本番ブランチ`main`へデプロイした。Deployment IDは`767e9076-ac52-44fe-9989-f6cc39a99f8d`。本番とデプロイ固有URLでカタログ掲載とサムネイル（HTTP 200）を確認した。Hub用3:2サムネイルは`img/thumbnails/gameplay/bigblade-knight.png`、itchアップロード用プロフィール画像は`img/itch/bigblade-knight-profile.png`。
