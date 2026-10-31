@@ -34,7 +34,7 @@ test('Hub build contains all catalog images and pages, without repository files'
   }
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
   const catalog = JSON.parse(await readFile(join(output, 'apps.json'), 'utf8'));
-  assert.equal(catalog.apps.length, 13);
+  assert.equal(catalog.apps.length, 12);
   assert.equal(catalog.apps.filter(app => app.status === 'development').length, 5);
   const vegenetica = catalog.apps.find(app => app.id === 'vegenetica');
   assert.equal(vegenetica?.status, 'development');
