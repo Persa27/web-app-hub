@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, writeFile, readFile, readdir, cp, rm } from 'node:fs/pr
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { isApprovedPagesUrl } from '../scripts/pages-url-validation.mjs';
+import { isApprovedAppUrl, isApprovedPagesUrl } from '../scripts/pages-url-validation.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 test('Pages deployment targets the canonical production project', async () => {
@@ -34,7 +34,7 @@ test('Hub build contains all catalog images and pages, without repository files'
   }
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
   const catalog = JSON.parse(await readFile(join(output, 'apps.json'), 'utf8'));
-  assert.equal(catalog.apps.length, 12);
+  assert.equal(catalog.apps.length, 13);
   assert.equal(catalog.apps.filter(app => app.status === 'development').length, 5);
   const vegenetica = catalog.apps.find(app => app.id === 'vegenetica');
   assert.equal(vegenetica?.status, 'development');
@@ -52,7 +52,7 @@ test('Hub build contains all catalog images and pages, without repository files'
   assert.deepEqual([triad?.imageWidth, triad?.imageHeight], [1200, 800]);
   for (const app of catalog.apps) {
     if (app.status === 'development') assert.equal(app.url, undefined, app.id);
-    else assert.equal(isApprovedPagesUrl(app.url), true, app.url);
+    else assert.equal(isApprovedAppUrl(app.url), true, app.url);
   }
   for (const app of catalog.apps) await readFile(join(output, app.image));
 });

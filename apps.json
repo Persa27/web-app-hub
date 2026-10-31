@@ -488,6 +488,47 @@
           "note": "スマートフォン・タブレット・PCのブラウザで遊べます。"
         }
       }
+    },
+    {
+      "id": "bigblade-knight",
+      "uploadedAt": "2026-10-31",
+      "updatedAt": "2026-10-31",
+      "status": "published",
+      "categories": [
+        "adventure"
+      ],
+      "url": "https://tama-lab.itch.io/bigblade-knight",
+      "image": "img/thumbnails/gameplay/bigblade-knight.png",
+      "imageWidth": 1536,
+      "imageHeight": 1024,
+      "tape": "blue",
+      "audience": "general",
+      "copy": {
+        "children": {
+          "name": "BIGBLADE KNIGHT",
+          "kana": "びっぐぶれーどないと",
+          "description": "けんしは じどうで たたかうよ。けんをそだて、すきるをくみあわせて、まおうをたおそう！",
+          "tags": [
+            "じどうバトル",
+            "けんをそだてる",
+            "まおうにちょうせん"
+          ],
+          "imageAlt": "おおきなけんとたてをもったドットえのきし。まおうとたたかいながら、アリーナをすすむよ。",
+          "note": "きょうかをえらんで、きしのそだちかたをきめよう。"
+        },
+        "all": {
+          "name": "BIGBLADE KNIGHT",
+          "kana": "びっぐぶれーどないと",
+          "description": "騎士が自動で戦うモノクロのオートバトル。強化を組み合わせてスキルを作り、28回の選択を使い切る前に魔王を倒そう。",
+          "tags": [
+            "オートバトル",
+            "強化とスキル合成",
+            "巨大な剣"
+          ],
+          "imageAlt": "巨大な剣と盾を持つ騎士が、白黒ドット絵の闘技場で魔王に挑む。",
+          "note": "ルートと強化を考えながら、魔王撃破と全6タイトルを目指します。"
+        }
+      }
     }
   ]
 }
