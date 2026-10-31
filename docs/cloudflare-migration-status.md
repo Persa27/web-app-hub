@@ -120,3 +120,7 @@ HubカタログにMONO QUESTを追加し、`tamalab-hub`の本番ブランチ`ma
 ## 2026-10-27 開発中アプリのリンク無効化
 
 開発中5作品のリンクをHub上で出力しないよう変更し、公開カタログからも各URLを除外して`tamalab-hub`の本番ブランチ`main`へデプロイした。Deployment IDは`f26d3c44-838b-4414-9e6a-9704d447d826`。本番URLとデプロイ固有URLの両方で、開発中URLが`apps.json`、`main.js`、`index.html`に含まれないことを確認した。
+
+## 2026-10-31 MONO QUESTをHubから削除
+
+HubカタログからMONO QUESTを削除し、12作品を含む状態で`tamalab-hub`の本番ブランチ`main`へデプロイした。Deployment IDは`412770ab-166e-4701-a974-056f0cd15ee7`。本番とデプロイ固有URLの`apps.json`に掲載がなく、専用サムネイルも新デプロイでは404となることを確認した。旧サムネイルURLはCloudflareエッジキャッシュからHTTP 200（`CF-Cache-Status: HIT`、7日TTL）で返る状態を確認。キャッシュ回避URLと新デプロイURLはHTTP 404。
