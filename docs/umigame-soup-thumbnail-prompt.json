@@ -1,0 +1,16 @@
+{
+  "id": "umigame-soup",
+  "generator": "ChatGPT (chatgpt.com) image generation via Claude in Chrome",
+  "date": "2026-11-04",
+  "prompt": "画像を生成してください（画像生成ツールを使用）。Use case: compositing. ONE polished landscape 3:2 thumbnail (1536x1024) for the Japanese children's app hub tamalab. 添付1枚目は小学生向けウミガメのスープアプリ「ひらめきスープ」の実際のゲーム画面スクリーンショット、2枚目は別アプリの完成済みサムネイルで【スタイル参考のみ】。1枚目を「はい・いいえで答えられる質問をえらんで、ふしぎなお話の謎をとく」ことが伝わるサムネイルに作り直す。左にフェルト風コラージュのイラスト（傘をさして朝ごはんを食べる男の子とお母さん）を白いステッカー縁取りで大きく、右にスクリーンショットの本物の切り抜きを白い角丸フレーム（淡いオレンジ枠）で配置。背景はクリーム#fff8ecにオレンジ#ff9f1cとティール#2ec4b6の角丸シェイプ。下部に大きな白い角丸キャプション帯（濃紺#253454、オレンジの下線）とアプリ名チップ。上部12%は余白。Text (verbatim): 「しつもんして、なぞをとこう！」「ひらめきスープ」「はい・いいえ」。",
+  "sourceImages": [
+    "img/screenshots/umigame-soup.png",
+    "img/thumbnails/gameplay/quiz-zukan.webp"
+  ],
+  "file": "img/thumbnails/gameplay/umigame-soup.webp",
+  "export": {
+    "width": 1200,
+    "height": 800,
+    "quality": 88
+  }
+}

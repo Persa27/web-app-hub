@@ -82,6 +82,7 @@ test("catalogModesIncludeExpectedIds", async () => {
       "math-marathon",
       "quiz-zukan",
       "shatepon",
+      "umigame-soup",
     ],
     family: ["treasure"],
     general: ["sock-pair", "chimo", "triad-io", "sentinel-blacklist", "vegenetica", "bigblade-knight"],
@@ -99,7 +100,7 @@ test("catalogModesIncludeExpectedIds", async () => {
   for (const [audience, expectedIds] of Object.entries(expectedAudiences)) {
     assert.deepEqual(actualAudienceIds[audience], [...expectedIds].sort(), audience);
   }
-  assert.equal(catalogApps.length, 13);
+  assert.equal(catalogApps.length, 14);
   assert.deepEqual(
     filterAppsByMode(catalogApps, "children").map((app) => app.id),
     [
@@ -110,6 +111,7 @@ test("catalogModesIncludeExpectedIds", async () => {
       "math-marathon",
       "quiz-zukan",
       "shatepon",
+      "umigame-soup",
     ],
   );
   assert.deepEqual(
