@@ -128,3 +128,7 @@ HubカタログからMONO QUESTを削除し、12作品を含む状態で`tamalab
 ## 2026-10-31 BIGBLADE KNIGHTをHubに追加
 
 `https://tama-lab.itch.io/bigblade-knight`を公開作品としてカタログへ追加し、13作品を`tamalab-hub`の本番ブランチ`main`へデプロイした。Deployment IDは`767e9076-ac52-44fe-9989-f6cc39a99f8d`。本番とデプロイ固有URLでカタログ掲載とサムネイル（HTTP 200）を確認した。Hub用3:2サムネイルは`img/thumbnails/gameplay/bigblade-knight.png`、itchアップロード用プロフィール画像は`img/itch/bigblade-knight-profile.png`。
+
+## 2026-11-07 シャテポンとVegeneticaを公開側へ変更
+
+シャテポンとVegeneticaの状態を`published`へ変更し、Hubの公開作品一覧とリンクを有効化した。14作品中、公開11作品・開発中3作品。カタログテスト19件とPagesテスト4件が通過。Deployment IDは`a8354a90-926e-4442-85fb-d9fff33bb1fa`。本番とデプロイ固有URLの両方で2作品の公開状態・URLを確認し、残る開発中作品のURLが公開カタログに含まれないことも確認した。
