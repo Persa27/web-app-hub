@@ -1,6 +1,7 @@
 const APPROVED_PAGES_URL = /^https:\/\/tamalab(?:-|\.)[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.pages\.dev\/$/;
 const APPROVED_EXTERNAL_APP_URLS = new Set([
   "https://tama-lab.itch.io/bigblade-knight",
+  "https://hirameki-soup.tamalab-hub.workers.dev/",
 ]);
 
 export function isApprovedPagesUrl(value) {

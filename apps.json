@@ -85,8 +85,8 @@
     {
       "id": "vegenetica",
       "uploadedAt": "2026-10-22",
-      "updatedAt": "2026-10-22",
-      "status": "development",
+      "updatedAt": "2026-11-07",
+      "status": "published",
       "categories": [
         "grow",
         "race"
@@ -410,8 +410,8 @@
     {
       "id": "shatepon",
       "uploadedAt": "2026-10-19",
-      "updatedAt": "2026-10-21",
-      "status": "development",
+      "updatedAt": "2026-11-07",
+      "status": "published",
       "categories": [
         "adventure"
       ],

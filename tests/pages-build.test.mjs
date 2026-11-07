@@ -34,16 +34,16 @@ test('Hub build contains all catalog images and pages, without repository files'
   }
   for (const name of ['.git', '.env', '.vercel', 'docs', 'tests', 'node_modules']) assert.ok(!files.includes(name), name);
   const catalog = JSON.parse(await readFile(join(output, 'apps.json'), 'utf8'));
-  assert.equal(catalog.apps.length, 13);
-  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 5);
+  assert.equal(catalog.apps.length, 14);
+  assert.equal(catalog.apps.filter(app => app.status === 'development').length, 3);
   const vegenetica = catalog.apps.find(app => app.id === 'vegenetica');
-  assert.equal(vegenetica?.status, 'development');
-  assert.equal(vegenetica?.url, undefined);
+  assert.equal(vegenetica?.status, 'published');
+  assert.equal(vegenetica?.url, 'https://tamalab.vegenetica.pages.dev/');
   assert.equal(vegenetica?.image, 'img/thumbnails/gameplay/vegenetica.png');
   assert.deepEqual([vegenetica?.imageWidth, vegenetica?.imageHeight], [1200, 800]);
   const shatepon = catalog.apps.find(app => app.id === 'shatepon');
-  assert.equal(shatepon?.status, 'development');
-  assert.equal(shatepon?.url, undefined);
+  assert.equal(shatepon?.status, 'published');
+  assert.equal(shatepon?.url, 'https://tamalab.shatepon.pages.dev/');
   assert.deepEqual([shatepon?.imageWidth, shatepon?.imageHeight], [1200, 800]);
   const triad = catalog.apps.find(app => app.id === 'triad-io');
   assert.equal(triad?.status, 'published');
@@ -64,6 +64,7 @@ test('packager excludes secrets and rejects paths outside the project', async ()
     await cp(join(root, 'scripts/build-pages.mjs'), join(fixture, 'scripts/build-pages.mjs'));
     await mkdir(join(fixture, 'public'));
     await writeFile(join(fixture, 'public/index.html'), '<h1>Fixture</h1>');
+    await writeFile(join(fixture, 'public/apps.json'), JSON.stringify({ apps: [] }));
     await writeFile(join(fixture, 'public/.env'), 'SECRET=never-publish');
     await writeFile(join(fixture, 'pages-assets.json'), JSON.stringify({ entries: [{ from: 'public', to: '.' }] }));
     const run = () => spawnSync(process.execPath, ['scripts/build-pages.mjs'], { cwd: fixture, encoding: 'utf8' });

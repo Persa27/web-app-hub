@@ -122,7 +122,7 @@ test("catalogModesIncludeExpectedIds", async () => {
     filterAppsByMode(catalogApps, "children")
       .filter((app) => app.status === "development")
       .map((app) => app.id),
-    ["ballrace", "math-marathon", "shatepon"],
+    ["ballrace", "math-marathon"],
   );
 });
 
