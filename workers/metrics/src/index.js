@@ -12,6 +12,9 @@ export const APP_IDS = Object.freeze([
   "sentinel-blacklist",
   "shatepon",
   "triad-io",
+  "vegenetica",
+  "bigblade-knight",
+  "umigame-soup",
 ]);
 
 const HUB_ORIGINS = new Set([
@@ -41,6 +44,10 @@ const APP_ORIGINS = new Map([
   ["https://tamalab-shatepon.pages.dev", "shatepon"],
   ["https://tamalab.triad-io.pages.dev", "triad-io"],
   ["https://tamalab-triad-io.pages.dev", "triad-io"],
+  ["https://tamalab.vegenetica.pages.dev", "vegenetica"],
+  ["https://tamalab-vegenetica.pages.dev", "vegenetica"],
+  ["https://hirameki-soup.tamalab-hub.workers.dev", "umigame-soup"],
+  ["https://html-classic.itch.zone", "bigblade-knight"],
 ]);
 const ALLOWED_ORIGINS = new Set([...HUB_ORIGINS, ...APP_ORIGINS.keys()]);
 const APP_ID_SET = new Set(APP_IDS);

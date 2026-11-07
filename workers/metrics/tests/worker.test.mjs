@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import test from "node:test";
@@ -9,7 +9,7 @@ const HUB_ORIGIN = "https://tamalab.hub-6r8.pages.dev";
 const LEGACY_HUB_ORIGIN = "https://tamalab-hub.pages.dev";
 const APP_ORIGIN = "https://tamalab.sock-pair.pages.dev";
 const LEGACY_APP_ORIGIN = "https://tamalab-sock-pair.pages.dev";
-const PAGES_APP_ORIGINS = new Map([
+const APP_TEST_ORIGINS = new Map([
   ["sock-pair", "https://tamalab.sock-pair.pages.dev"],
   ["chimo", "https://tamalab.chimo-race.pages.dev"],
   ["ballrace", "https://tamalab.ball-race.pages.dev"],
@@ -21,6 +21,9 @@ const PAGES_APP_ORIGINS = new Map([
   ["sentinel-blacklist", "https://tamalab.sentinel-blacklist.pages.dev"],
   ["shatepon", "https://tamalab.shatepon.pages.dev"],
   ["triad-io", "https://tamalab.triad-io.pages.dev"],
+  ["vegenetica", "https://tamalab.vegenetica.pages.dev"],
+  ["umigame-soup", "https://hirameki-soup.tamalab-hub.workers.dev"],
+  ["bigblade-knight", "https://html-classic.itch.zone"],
 ]);
 const APP_IDS = [
   "sock-pair",
@@ -34,6 +37,9 @@ const APP_IDS = [
   "sentinel-blacklist",
   "shatepon",
   "triad-io",
+  "vegenetica",
+  "bigblade-knight",
+  "umigame-soup",
 ];
 
 async function createWorker() {
@@ -94,6 +100,14 @@ function postPageView(origin, body) {
   });
 }
 
+test("everyPublishedCatalogAppHasACounter", async () => {
+  const { APP_IDS: registeredIds } = await import(entryUrl.href);
+  const catalog = JSON.parse(readFileSync(new URL("../../../apps.json", import.meta.url), "utf8"));
+  for (const app of catalog.apps.filter(app => app.status !== "development")) {
+    assert.ok(registeredIds.includes(app.id), app.id + " is missing from the metrics registry");
+  }
+});
+
 test("servesOneClientForKnownApp", async () => {
   const { worker, env } = await createWorker();
   const response = await worker.fetch(
@@ -145,14 +159,14 @@ test("incrementsKnownAppFromAllowedOrigin", async () => {
   assert.equal(storageByAppId.get("sock-pair").get("sock-pair"), 1);
 });
 
-test("acceptsEveryPagesAppAliasForItsCatalogId", async () => {
+test("acceptsEveryAppOriginForItsCatalogId", async () => {
   const { worker, env } = await createWorker();
-  const entries = [...PAGES_APP_ORIGINS];
+  const entries = [...APP_TEST_ORIGINS];
   const responses = await Promise.all(entries.map(([appId, origin]) =>
     worker.fetch(postPageView(origin, JSON.stringify({ appId })), env),
   ));
 
-  assert.deepEqual(responses.map(response => response.status), Array(11).fill(204));
+  assert.deepEqual(responses.map(response => response.status), Array(entries.length).fill(204));
   for (const [index, response] of responses.entries()) {
     assert.equal(response.headers.get("access-control-allow-origin"), entries[index][1]);
   }
@@ -218,6 +232,11 @@ test("rejectsAnAppClaimingAnotherAppIdAndHubWritesWithoutIncrementing", async ()
   assert.equal(crossApp.status, 403);
   assert.equal(crossApp.headers.get("access-control-allow-origin"), APP_ORIGIN);
   assert.equal(hubWrite.status, 403);
+  const itchCrossApp = await worker.fetch(
+    postPageView("https://html-classic.itch.zone", JSON.stringify({ appId: "sock-pair" })),
+    env,
+  );
+  assert.equal(itchCrossApp.status, 403);
   assert.equal(storageByAppId.size, 0);
 });
 
