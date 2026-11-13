@@ -1,8 +1,8 @@
 // Page wording lives here so the HTML and the rendered catalog say the same thing.
 export const HUB_COPY = {
-  documentTitle: "tamalab GAME CORNER｜ブラウザで遊べるゲーム売り場",
-  metaDescription: "tamalabが制作するブラウザゲームの売り場。料金表示・対象・対応環境を確認して、気になる作品をそのまま遊べます。",
-  categoryAll: "全売り場",
+  documentTitle: "tamalab｜ブラウザで遊べるゲームコーナー",
+  metaDescription: "tamalabが制作するブラウザゲームのコーナー。料金表示・対象・対応環境を確認して、気になる作品をそのまま遊べます。",
+  categoryAll: "すべて",
   categoryAdventure: "冒険",
   categoryGrow: "育成",
   categoryRace: "競走",
@@ -33,7 +33,7 @@ export const HUB_COPY = {
   pickupPause: "PVを一時停止",
   pickupFullPv: "音ありでPVを見る",
   pvDialogClose: "閉じる",
-  emptyFloor: "この売り場に該当する作品はありません。",
+  emptyFloor: "このコーナーに該当する作品はありません。",
 };
 
 export function getHubCopy() {

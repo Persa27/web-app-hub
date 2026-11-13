@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
-    <title>tamalab GAME CORNER｜ブラウザで遊べるゲーム売り場</title>
+    <title>tamalab｜ブラウザで遊べるゲームコーナー</title>
     <meta
       name="description"
-      content="tamalabが制作するブラウザゲームの売り場。料金表示・対象・対応環境を確認して、気になる作品をそのまま遊べます。"
+      content="tamalabが制作するブラウザゲームのコーナー。料金表示・対象・対応環境を確認して、気になる作品をそのまま遊べます。"
     />
     <link rel="icon" href="img/favicon.svg?v=tamalab" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,16 +20,15 @@
     <script type="module" src="main.js?v=game-corner"></script>
   </head>
   <body class="home">
-    <a class="skip-link" href="#floor">ゲーム売り場へ移動</a>
+    <a class="skip-link" href="#floor">ゲームコーナーへ移動</a>
     <header class="site-nav">
       <div class="nav-inner wrap">
-        <a class="brand" href="./" aria-label="tamalab GAME CORNER ホーム">
+        <a class="brand" href="./" aria-label="tamalab ホーム">
           <img class="brand-logo" src="img/tamalab-logo.webp" alt="tamalab" width="720" height="217" />
-          <span class="brand-caption" lang="en">GAME CORNER</span>
         </a>
-        <nav class="floor-nav" aria-label="売り場案内">
+        <nav class="floor-nav" aria-label="コーナー案内">
           <a href="#pickup">店頭イチオシ</a>
-          <a href="#floor">ゲーム売り場</a>
+          <a href="#floor">ゲームコーナー</a>
           <a href="#family">キッズ<span class="nav-long">・ファミリー</span></a>
           <a href="#guide">ご利用案内</a>
         </nav>
@@ -41,7 +40,7 @@
           <div class="pop-heading">
             <p class="pop-eyebrow" lang="en">PICK UP</p>
             <h1 id="pickup-title"><span class="pop-burst">店頭イチオシ！</span></h1>
-            <p class="pop-caption">ブラウザですぐ遊べる、tamalabのゲーム売り場です。</p>
+            <p class="pop-caption">ブラウザですぐ遊べる、tamalabのゲームコーナーです。</p>
           </div>
           <div class="pickup-stage" id="pickup-stage" aria-live="polite"></div>
         </div>
@@ -49,14 +48,14 @@
 
       <section class="floor wrap" id="floor" aria-labelledby="floor-title">
         <div class="floor-heading">
-          <p class="floor-sign" lang="en">GAME FLOOR</p>
-          <h2 id="floor-title">ゲーム売り場</h2>
+          <p class="floor-sign" lang="en">GAME CORNER</p>
+          <h2 id="floor-title">ゲームコーナー</h2>
           <p class="floor-caption">テレビの画面を選ぶと、新しいタブで作品が開きます。</p>
         </div>
         <div class="filter-bar" id="filter-bar" hidden>
-          <div class="hanging-signs" role="group" aria-label="売り場カテゴリー">
+          <div class="hanging-signs" role="group" aria-label="作品カテゴリー">
             <button type="button" class="sign-button is-active" data-filter="all" aria-pressed="true">
-              全売り場 <span class="sign-count" id="total-count"></span>
+              すべて <span class="sign-count" id="total-count"></span>
             </button>
             <button type="button" class="sign-button" data-filter="adventure" aria-pressed="false">冒険</button>
             <button type="button" class="sign-button" data-filter="grow" aria-pressed="false">育成</button>
@@ -168,9 +167,8 @@
       </section>
     </main>
     <footer class="site-footer wrap home-footer">
-      <a class="footer-brand" href="./" aria-label="tamalab GAME CORNER ホーム">
+      <a class="footer-brand" href="./" aria-label="tamalab ホーム">
         <img class="footer-logo" src="img/tamalab-logo.webp" alt="tamalab" width="720" height="217" />
-        <span lang="en">GAME CORNER</span>
       </a>
       <p>© 2026 tamalab</p>
       <a class="back-top" href="#" aria-label="ページ上部へ戻る">↑</a>
