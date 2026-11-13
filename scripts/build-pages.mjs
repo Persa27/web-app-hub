@@ -11,10 +11,12 @@ function inside(base, path) {
   return path;
 }
 const excluded = /(^|\/)(\.[^/]+|node_modules|docs|tests|promo|_review_candidates|_self_review_candidates|_debug_compare|_debug_sheet_grid\.png)(\/|$)|\.(psd|blend|zip|mp4|mov|pyc)$|(^|\/)(sheet(?:_transparent)?\.png|gemini_prompt\.txt|gemini_reference\.png|portrait_prompt\.txt)$|_(preview|compare|raw_evolve|sheet_extract)/i;
+// Promo videos are published only from the pickup folder; other .mp4 files stay excluded.
+const publishedMedia = /^media\/pv\/[^/]+\.(mp4|webm|webp)$/i;
 let count = 0;
 let bytes = 0;
 async function copy(source, destination, name) {
-  if (excluded.test(name)) return;
+  if (excluded.test(name) && !publishedMedia.test(name)) return;
   inside(root, source);
   inside(output, destination);
   const info = await lstat(source);
