@@ -146,7 +146,6 @@ function renderPickupMain(app) {
         <span class="big-tv-stand" aria-hidden="true"></span>
       </div>
       <div class="pickup-pop">
-        <p class="pickup-ribbon" lang="en">PICK UP</p>
         <p class="pop-category">${esc(categoryLabel(app))}</p>
         <h2 class="pickup-name" id="pickup-name-${esc(app.id)}">${esc(appCopy.name)}</h2>
         ${priceTagsHtml(app)}

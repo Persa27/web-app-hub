@@ -394,22 +394,11 @@ a.tv:is(:hover, :focus-visible) .tv-screen img {
   position: relative;
   display: grid;
   gap: 12px;
-  padding: 26px 22px 22px;
+  padding: 22px;
   background: var(--white);
   border: 3px solid var(--red);
   border-radius: var(--radius);
   box-shadow: 6px 6px 0 var(--yellow);
-}
-.pickup-ribbon {
-  position: absolute;
-  top: -14px;
-  left: 18px;
-  padding: 3px 12px;
-  background: var(--yellow);
-  font: 12px/1.4 var(--pop-font);
-  letter-spacing: 0.12em;
-  border-radius: 4px;
-  transform: rotate(-3deg);
 }
 .pop-category {
   color: var(--theme);
@@ -926,7 +915,7 @@ a.tv:is(:hover, :focus-visible) .tv-screen img {
     border-radius: 10px;
   }
   .pickup-pop {
-    padding: 22px 16px 16px;
+    padding: 18px 16px 16px;
   }
   .tv-wall {
     grid-template-columns: repeat(2, minmax(0, 1fr));
