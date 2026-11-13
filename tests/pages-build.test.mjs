@@ -55,6 +55,9 @@ test('Hub build contains all catalog images and pages, without repository files'
     else assert.equal(isApprovedAppUrl(app.url), true, app.url);
   }
   for (const app of catalog.apps) await readFile(join(output, app.image));
+  for (const app of catalog.apps.filter(entry => entry.video)) {
+    for (const path of [app.video.poster, ...app.video.loop.map(source => source.src), app.video.full.src]) await readFile(join(output, path));
+  }
 });
 
 test('packager excludes secrets and rejects paths outside the project', async () => {

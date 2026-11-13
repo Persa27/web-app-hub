@@ -1,15 +1,17 @@
-// Add apps and their categories in apps.json; the layout follows the catalog.
-import { filterAppsByMode, DEFAULT_CATALOG_MODE, getAppCopy } from "./catalog-audience.js";
-import { formatDate, formatPageViews, loadPageViews, sortApps } from "./catalog-sort.js";
+// The page is a TV sales floor: apps.json decides what is on each shelf and on the pickup screen.
+import { getAppCopy, getPickupApps, getPriceTags, isDevelopment, splitByFloor } from "./catalog-audience.js";
+import { formatDate, loadPageViews, sortApps } from "./catalog-sort.js";
 import { getHubCopy } from "./hub-copy.js";
 
-const section = document.getElementById("apps");
-const developmentSection = document.getElementById("development-apps");
+const copy = getHubCopy();
+const mainFloor = document.getElementById("main-floor");
+const familyFloor = document.getElementById("family-floor");
+const pickupStage = document.getElementById("pickup-stage");
 const filterBar = document.getElementById("filter-bar");
 const resultCount = document.getElementById("result-count");
 const filterButtons = [...document.querySelectorAll("[data-filter]")];
-const modeButtons = [...document.querySelectorAll("[data-mode]")];
 const sortControl = document.getElementById("catalog-sort");
+const pvDialog = document.getElementById("pv-dialog");
 const METRICS_URL = "https://tamalab-metrics.tamalab-hub.workers.dev";
 const CATEGORY_COPY_KEYS = {
   adventure: "categoryAdventure",
@@ -17,170 +19,307 @@ const CATEGORY_COPY_KEYS = {
   race: "categoryRace",
   learn: "categoryLearn",
 };
-const SORT_COPY_KEYS = {
-  featured: "sortFeatured",
-  "uploaded-desc": "sortUploadedNewest",
-  "uploaded-asc": "sortUploadedOldest",
-  "updated-desc": "sortUpdatedNewest",
-  "updated-asc": "sortUpdatedOldest",
-  "views-desc": "sortViewsMost",
-  "views-asc": "sortViewsLeast",
-  "updated-uploaded-views-desc": "sortCompound",
-};
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
-let currentMode = DEFAULT_CATALOG_MODE;
 let currentFilter = "all";
 let currentSort = sortControl.value;
 let catalogApps = [];
 let pageViews = null;
 let hasRequestedPageViews = false;
+let pickupVideo = null;
 
 function esc(value) {
   return String(value).replace(
     /[&<>"']/g,
-    (c) =>
-      ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;",
-      })[c],
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
   );
 }
 
-function applyHubCopy() {
-  const copy = getHubCopy(currentMode);
-  document.title = copy.documentTitle;
-
-  for (const target of document.querySelectorAll("[data-hub-copy]")) {
-    const value = copy[target.dataset.hubCopy];
-    if (typeof value === "string") target.textContent = value;
-  }
-
-  for (const target of document.querySelectorAll("[data-hub-attr]")) {
-    const [attribute, key] = target.dataset.hubAttr.split(":");
-    const value = copy[key];
-    if (attribute && typeof value === "string") target.setAttribute(attribute, value);
-  }
-
-  for (const option of sortControl.options) {
-    const key = SORT_COPY_KEYS[option.value];
-    if (key) option.textContent = copy[key];
-  }
-
-  for (const button of modeButtons) {
-    const active = button.dataset.mode === currentMode;
-    button.classList.toggle("is-active", active);
-    button.setAttribute("aria-pressed", String(active));
-  }
+function categoryLabel(app) {
+  return copy[CATEGORY_COPY_KEYS[app.categories?.[0]]] || copy.categoryFallback;
 }
 
-function renderCard(app) {
-  const copy = getAppCopy(app, currentMode);
-  const hubCopy = getHubCopy(currentMode);
-  const categoryKey = CATEGORY_COPY_KEYS[app.categories?.[0]];
-  const categoryLabel = hubCopy[categoryKey] || hubCopy.categoryFallback;
-  const isDeveloping = app.status === "development";
-  const coverTag = isDeveloping ? "div" : "a";
-  const coverAttributes = isDeveloping
+function priceTagsHtml(app) {
+  return `<ul class="price-tags" aria-label="${esc(copy.priceAriaLabel)}">${getPriceTags(app)
+    .map((tag) => `<li class="price-tag" data-kind="${esc(tag.kind)}">${esc(tag.label)}</li>`)
+    .join("")}</ul>`;
+}
+
+function tagsHtml(appCopy) {
+  return `<ul class="app-tags" aria-label="${esc(copy.tagsAriaLabel)}">${appCopy.tags
+    .map((tag) => `<li>${esc(tag)}</li>`)
+    .join("")}</ul>`;
+}
+
+// Data saver and very slow links get a still image and a play button instead of autoplay.
+function prefersLightPage() {
+  const connection = navigator.connection;
+  return Boolean(connection?.saveData) || /(^|-)2g$/.test(connection?.effectiveType ?? "");
+}
+
+function renderTv(app) {
+  const appCopy = getAppCopy(app);
+  const developing = isDevelopment(app);
+  const screenTag = developing ? "div" : "a";
+  const screenAttributes = developing
     ? ""
-    : ` href="${esc(app.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(`${copy.name}${hubCopy.coverAction}`)}"`;
+    : ` href="${esc(app.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(`${appCopy.name}${copy.playAction}`)}"`;
   const card = document.createElement("article");
-  card.className = "app-card";
+  card.className = `tv-card${developing ? " is-off" : ""}`;
   card.dataset.id = app.id;
   card.dataset.theme = app.tape;
   card.dataset.categories = (app.categories || []).join(" ");
   card.setAttribute("aria-labelledby", `title-${app.id}`);
   card.innerHTML = `
-    <${coverTag} class="app-cover"${coverAttributes}>
-      <span class="cover-meta"><span class="category-label" aria-hidden="true">${esc(categoryLabel)}</span>${isDeveloping ? `<span class="development-badge">${esc(hubCopy.developmentBadge)}</span>` : '<span class="cover-arrow" aria-hidden="true">↗</span>'}</span>
-      <span class="app-shot"><img src="${esc(app.image)}" alt="${esc(copy.imageAlt)}" width="${esc(app.imageWidth)}" height="${esc(app.imageHeight)}" loading="lazy" decoding="async"></span>
-    </${coverTag}>
-    <div class="app-text">
-      <p class="app-kana">${esc(copy.kana)}</p>
-      <h2 class="app-name" id="title-${esc(app.id)}">${esc(copy.name)}</h2>
-      <p class="app-desc">${esc(copy.description)}</p>
-      <ul class="app-tags" aria-label="${esc(hubCopy.tagsAriaLabel)}">${copy.tags.map((tag) => `<li>${esc(tag)}</li>`).join("")}</ul>
-      <dl class="app-metadata" aria-label="${esc(hubCopy.metadataAriaLabel)}">
-        <div><dt>${esc(hubCopy.uploadedLabel)}</dt><dd>${formatDate(app.uploadedAt)}</dd></div>
-        <div><dt>${esc(hubCopy.updatedLabel)}</dt><dd>${formatDate(app.updatedAt)}</dd></div>
-        <div><dt>${esc(hubCopy.pageViewsLabel)}</dt><dd data-page-views="${esc(app.id)}">${formatPageViews(pageViews?.[app.id])}</dd></div>
+    <${screenTag} class="tv"${screenAttributes}>
+      <span class="tv-screen">
+        <img src="${esc(app.image)}" alt="${esc(appCopy.imageAlt)}" width="${esc(app.imageWidth)}" height="${esc(app.imageHeight)}" loading="lazy" decoding="async">
+        ${developing ? `<span class="coming-pop">${esc(copy.comingPop)}</span>` : '<span class="tv-glare" aria-hidden="true"></span>'}
+      </span>
+      <span class="tv-stand" aria-hidden="true"></span>
+    </${screenTag}>
+    <div class="pop-card">
+      <p class="pop-category">${esc(categoryLabel(app))}</p>
+      <h3 class="app-name" id="title-${esc(app.id)}">${esc(appCopy.name)}</h3>
+      ${priceTagsHtml(app)}
+      <p class="app-desc">${esc(developing ? copy.comingNotice : appCopy.description)}</p>
+      <details class="pop-details">
+        <summary>${esc(copy.detailsSummary)}</summary>
+        <p>${esc(developing ? copy.comingNotice : appCopy.description)}</p>
+        ${developing ? "" : `<p class="app-note">${esc(appCopy.note)}</p>`}
+      </details>
+      ${tagsHtml(appCopy)}
+      <dl class="app-metadata" aria-label="${esc(copy.metadataAriaLabel)}">
+        <div><dt>${esc(copy.uploadedLabel)}</dt><dd>${formatDate(app.uploadedAt)}</dd></div>
+        <div><dt>${esc(copy.updatedLabel)}</dt><dd>${formatDate(app.updatedAt)}</dd></div>
       </dl>
-      <p class="app-note">${isDeveloping ? "" : '<span class="device-icon" aria-hidden="true"></span>'}<span>${esc(isDeveloping ? hubCopy.developmentCardNotice : copy.note)}</span></p>
     </div>`;
+  if (!developing && app.video?.loop?.length) attachHoverPreview(card, app);
   return card;
+}
+
+// Pointing at a TV that has a PV switches it on with a silent preview; touch screens keep the still.
+function attachHoverPreview(card, app) {
+  const screen = card.querySelector(".tv-screen");
+  let video = null;
+  card.querySelector(".tv").addEventListener("pointerenter", () => {
+    if (!finePointer.matches || reducedMotion.matches || prefersLightPage()) return;
+    if (!video) {
+      video = document.createElement("video");
+      video.className = "tv-preview";
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute("aria-hidden", "true");
+      for (const source of app.video.loop) {
+        const element = document.createElement("source");
+        element.src = source.src;
+        element.type = source.type;
+        video.appendChild(element);
+      }
+      screen.appendChild(video);
+    }
+    card.classList.add("is-previewing");
+    video.play().catch(() => card.classList.remove("is-previewing"));
+  });
+  card.querySelector(".tv").addEventListener("pointerleave", () => {
+    card.classList.remove("is-previewing");
+    video?.pause();
+  });
+}
+
+function renderPickupMain(app) {
+  const appCopy = getAppCopy(app);
+  const hasVideo = Boolean(app.video?.loop?.length);
+  const poster = app.video?.poster || app.image;
+  const screen = hasVideo
+    ? `<video class="pickup-video" muted loop playsinline preload="none" poster="${esc(poster)}" aria-label="${esc(`${appCopy.name}のPV（音声なし）`)}">
+        ${app.video.loop.map((source) => `<source data-src="${esc(source.src)}" type="${esc(source.type)}">`).join("")}
+      </video>
+      <button type="button" class="pickup-toggle" aria-pressed="false"><span class="pickup-toggle-icon" aria-hidden="true">▶</span><span class="pickup-toggle-label">${esc(copy.pickupPlay)}</span></button>`
+    : `<img src="${esc(app.image)}" alt="${esc(appCopy.imageAlt)}" width="${esc(app.imageWidth)}" height="${esc(app.imageHeight)}" fetchpriority="high">`;
+  return `
+    <article class="pickup-main" data-theme="${esc(app.tape)}" aria-labelledby="pickup-name-${esc(app.id)}">
+      <div class="big-tv">
+        <div class="big-tv-screen">${screen}</div>
+        <span class="big-tv-stand" aria-hidden="true"></span>
+      </div>
+      <div class="pickup-pop">
+        <p class="pickup-ribbon" lang="en">PICK UP</p>
+        <p class="pop-category">${esc(categoryLabel(app))}</p>
+        <h2 class="pickup-name" id="pickup-name-${esc(app.id)}">${esc(appCopy.name)}</h2>
+        ${priceTagsHtml(app)}
+        <p class="pickup-desc">${esc(appCopy.description)}</p>
+        ${tagsHtml(appCopy)}
+        <p class="app-note">${esc(appCopy.note)}</p>
+        <div class="pickup-actions">
+          <a class="play-button" href="${esc(app.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(`${appCopy.name}${copy.playAction}`)}">${esc(copy.playButton)} <span aria-hidden="true">↗</span></a>
+          ${app.video?.full ? `<button type="button" class="pv-button" data-pv="${esc(app.id)}">${esc(copy.pickupFullPv)}</button>` : ""}
+        </div>
+      </div>
+    </article>`;
+}
+
+function renderPickupSub(app) {
+  const appCopy = getAppCopy(app);
+  return `
+    <li class="pickup-sub-item" data-theme="${esc(app.tape)}">
+      <a class="tv" href="${esc(app.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(`${appCopy.name}${copy.playAction}`)}">
+        <span class="tv-screen"><img src="${esc(app.image)}" alt="${esc(appCopy.imageAlt)}" width="${esc(app.imageWidth)}" height="${esc(app.imageHeight)}" loading="lazy" decoding="async"></span>
+      </a>
+      <p class="pickup-sub-name">${esc(appCopy.name)}</p>
+      ${priceTagsHtml(app)}
+    </li>`;
+}
+
+function renderPickup() {
+  const picks = getPickupApps(catalogApps);
+  document.getElementById("pickup").hidden = !picks.length;
+  if (!picks.length) return;
+  const [main, ...rest] = picks;
+  pickupStage.dataset.count = String(picks.length);
+  pickupStage.innerHTML = `${renderPickupMain(main)}${rest.length ? `<ul class="pickup-sub">${rest.map(renderPickupSub).join("")}</ul>` : ""}`;
+  const video = pickupStage.querySelector(".pickup-video");
+  if (video) setupPickupVideo(video, pickupStage.querySelector(".pickup-toggle"));
+}
+
+// The pickup PV never competes with the first paint: it only starts loading once the page has
+// finished loading and the screen is actually in view.
+function setupPickupVideo(video, toggle) {
+  let loaded = false;
+  let userPaused = false;
+  let inView = false;
+  const label = toggle.querySelector(".pickup-toggle-label");
+  const icon = toggle.querySelector(".pickup-toggle-icon");
+  const autoplayAllowed = () => !reducedMotion.matches && !prefersLightPage();
+
+  const load = () => {
+    if (loaded) return;
+    for (const source of video.querySelectorAll("source[data-src]")) source.src = source.dataset.src;
+    video.preload = "auto";
+    video.load();
+    loaded = true;
+  };
+  const play = () => {
+    load();
+    video.play().catch(() => {});
+  };
+  const sync = () => {
+    const playing = !video.paused;
+    toggle.setAttribute("aria-pressed", String(playing));
+    icon.textContent = playing ? "❚❚" : "▶";
+    label.textContent = playing ? copy.pickupPause : copy.pickupPlay;
+  };
+  video.addEventListener("play", sync);
+  video.addEventListener("pause", sync);
+  toggle.addEventListener("click", () => {
+    if (video.paused) {
+      userPaused = false;
+      play();
+    } else {
+      userPaused = true;
+      video.pause();
+    }
+  });
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      inView = entry.isIntersecting;
+      if (!inView) video.pause();
+      else if (!userPaused && autoplayAllowed() && !pvDialog.open) play();
+    },
+    { threshold: 0.35 },
+  );
+  const start = () => observer.observe(video);
+  if (document.readyState === "complete") start();
+  else window.addEventListener("load", start, { once: true });
+  pickupVideo = { video, resume: () => inView && !userPaused && autoplayAllowed() && play() };
+}
+
+function openPv(app) {
+  const video = pvDialog.querySelector("video");
+  pvDialog.querySelector("h2").textContent = `${getAppCopy(app).name} PV`;
+  video.src = app.video.full.src;
+  pickupVideo?.video.pause();
+  pvDialog.showModal();
+  video.play().catch(() => {});
+}
+
+pvDialog.addEventListener("close", () => {
+  const video = pvDialog.querySelector("video");
+  video.pause();
+  video.removeAttribute("src");
+  video.load();
+  pickupVideo?.resume();
+});
+pvDialog.addEventListener("click", (event) => {
+  if (event.target === pvDialog || event.target.closest("[data-close-dialog]")) pvDialog.close();
+});
+pickupStage.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-pv]");
+  const app = button && catalogApps.find((entry) => entry.id === button.dataset.pv);
+  if (app?.video?.full) openPv(app);
+});
+
+function renderFloor(container, apps) {
+  const published = sortApps(apps.filter((app) => !isDevelopment(app)), currentSort, pageViews);
+  const developing = sortApps(apps.filter(isDevelopment), currentSort, pageViews);
+  const fragment = document.createDocumentFragment();
+  for (const app of [...published, ...developing]) fragment.appendChild(renderTv(app));
+  const empty = document.createElement("p");
+  empty.className = "empty-floor";
+  empty.textContent = copy.emptyFloor;
+  empty.hidden = true;
+  fragment.appendChild(empty);
+  container.replaceChildren(fragment);
+  return published.length;
 }
 
 function applyFilter(value) {
   currentFilter = value;
   let visible = 0;
-  for (const card of section.querySelectorAll(".app-card")) {
-    card.hidden =
-      value !== "all" && !card.dataset.categories.split(" ").includes(value);
-    if (!card.hidden) visible++;
+  for (const container of [mainFloor, familyFloor]) {
+    let floorVisible = 0;
+    for (const card of container.querySelectorAll(".tv-card")) {
+      card.hidden = value !== "all" && !card.dataset.categories.split(" ").includes(value);
+      if (!card.hidden) {
+        floorVisible++;
+        if (!card.classList.contains("is-off")) visible++;
+      }
+    }
+    const empty = container.querySelector(".empty-floor");
+    if (empty) empty.hidden = floorVisible > 0;
   }
-  const coming = section.querySelector(".coming-card");
-  if (coming) coming.hidden = value !== "all";
   for (const button of filterButtons) {
     const active = button.dataset.filter === value;
     button.classList.toggle("is-active", active);
     button.setAttribute("aria-pressed", String(active));
   }
-  resultCount.textContent = getHubCopy(currentMode).resultCount.replace(
-    "{count}",
-    String(visible),
-  );
+  resultCount.textContent = copy.resultCount.replace("{count}", String(visible));
 }
 
 function renderCatalog() {
-  const focusedAppId = document.activeElement?.closest(".app-card")?.dataset.id;
-  const visibleApps = filterAppsByMode(catalogApps, currentMode);
-  const publishedApps = sortApps(
-    visibleApps.filter((app) => app.status !== "development"),
-    currentSort,
-    pageViews,
-  );
-  const developmentApps = sortApps(
-    visibleApps.filter((app) => app.status === "development"),
-    currentSort,
-    pageViews,
-  );
-  const copy = getHubCopy(currentMode);
-  const fragment = document.createDocumentFragment();
-  for (const app of publishedApps) fragment.appendChild(renderCard(app));
-  const coming = document.createElement("aside");
-  coming.className = "coming-card";
-  coming.innerHTML = `<div class="coming-art" aria-hidden="true"><span class="coming-block"></span><span class="coming-ball"></span><span class="coming-spark">✧</span></div><h2>${esc(copy.comingTitle)}</h2><p>${esc(copy.comingDescription)}</p><span class="coming-label">${esc(copy.comingLabel)}</span>`;
-  fragment.appendChild(coming);
-  section.replaceChildren(fragment);
-  const developmentFragment = document.createDocumentFragment();
-  for (const app of developmentApps)
-    developmentFragment.appendChild(renderCard(app));
-  developmentSection.replaceChildren(developmentFragment);
-  document.getElementById("development").hidden = !developmentApps.length;
-  document.getElementById("total-count").textContent = publishedApps.length;
+  const focusedAppId = document.activeElement?.closest(".tv-card")?.dataset.id;
+  const { main, family } = splitByFloor(catalogApps);
+  const total = renderFloor(mainFloor, main) + renderFloor(familyFloor, family);
+  document.getElementById("total-count").textContent = total;
   applyFilter(currentFilter);
   if (focusedAppId) {
-    const focusedCard = [...document.querySelectorAll(".app-card")]
-      .find((card) => card.dataset.id === focusedAppId);
-    focusedCard?.querySelector(".app-cover")?.focus({ preventScroll: true });
+    document.querySelector(`.tv-card[data-id="${CSS.escape(focusedAppId)}"] .tv`)?.focus({ preventScroll: true });
   }
 }
 
 async function render() {
-  section.setAttribute("aria-busy", "true");
+  mainFloor.setAttribute("aria-busy", "true");
   filterBar.hidden = true;
   try {
     const response = await fetch("apps.json", { cache: "no-cache" });
-    if (!response.ok)
-      throw new Error(`Catalog request failed: ${response.status}`);
+    if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
     const { apps } = await response.json();
-    if (!Array.isArray(apps) || !apps.length)
-      throw new Error("The catalog is empty");
-    if (!apps.some((app) => app.status !== "development"))
-      throw new Error("The published catalog is empty");
+    if (!Array.isArray(apps) || !apps.some((app) => !isDevelopment(app))) throw new Error("The published catalog is empty");
     catalogApps = apps;
+    renderPickup();
     renderCatalog();
     filterBar.hidden = false;
     if (!hasRequestedPageViews) {
@@ -192,11 +331,10 @@ async function render() {
       });
     }
   } catch {
-    const copy = getHubCopy(currentMode);
-    section.innerHTML = `<div class="load-error" role="alert"><p>${esc(copy.loadError)}</p><button class="retry-button" type="button">${esc(copy.retryButton)}</button></div>`;
-    section.querySelector("button").addEventListener("click", render);
+    mainFloor.innerHTML = `<div class="load-error" role="alert"><p>${esc(copy.loadError)}</p><button class="retry-button" type="button">${esc(copy.retryButton)}</button></div>`;
+    mainFloor.querySelector("button").addEventListener("click", render);
   } finally {
-    section.setAttribute("aria-busy", "false");
+    mainFloor.setAttribute("aria-busy", "false");
   }
 }
 
@@ -204,18 +342,9 @@ for (const button of filterButtons) {
   button.addEventListener("click", () => applyFilter(button.dataset.filter));
 }
 
-for (const button of modeButtons) {
-  button.addEventListener("click", () => {
-    currentMode = button.dataset.mode === "children" ? "children" : "all";
-    applyHubCopy();
-    renderCatalog();
-  });
-}
-
 sortControl.addEventListener("change", () => {
   currentSort = sortControl.value;
   renderCatalog();
 });
 
-applyHubCopy();
 render();

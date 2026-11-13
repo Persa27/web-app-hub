@@ -1,54 +1,35 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { readFileSync } from "node:fs";
 import test from "node:test";
+import { HUB_COPY, getHubCopy } from "../hub-copy.js";
 
-const moduleUrl = new URL("../hub-copy.js", import.meta.url);
-
-async function loadHubCopyModule() {
-  assert.ok(existsSync(fileURLToPath(moduleUrl)), "hub-copy.js must exist");
-  return import(moduleUrl.href);
-}
-
-function stringValues(value) {
-  if (typeof value === "string") return [value];
-  if (Array.isArray(value)) return value.flatMap(stringValues);
-  if (value && typeof value === "object") return Object.values(value).flatMap(stringValues);
-  return [];
-}
-
-test("childrenHubCopyContainsNoHan", async () => {
-  const { HUB_COPY } = await loadHubCopyModule();
-
-  assert.doesNotMatch(
-    stringValues(HUB_COPY.children).join(" "),
-    /\p{Script=Han}/u,
-  );
+test("hubCopyIsASingleAdultVoice", () => {
+  assert.strictEqual(getHubCopy(), HUB_COPY);
+  for (const [key, value] of Object.entries(HUB_COPY)) assert.equal(typeof value, "string", key);
+  assert.equal("children" in HUB_COPY, false);
 });
 
-test("bothHubModesProvideTheSameKeys", async () => {
-  const { HUB_COPY, getHubCopy } = await loadHubCopyModule();
+test("hubNoLongerOffersAChildrenDisplayMode", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 
-  assert.deepEqual(
-    Object.keys(HUB_COPY.children).sort(),
-    Object.keys(HUB_COPY.all).sort(),
-  );
-  assert.strictEqual(getHubCopy("children"), HUB_COPY.children);
-  assert.strictEqual(getHubCopy("all"), HUB_COPY.all);
-  assert.strictEqual(getHubCopy("invalid"), HUB_COPY.all);
-  assert.equal(HUB_COPY.children.modeAllButton, "ぜんぶ");
-  assert.equal(HUB_COPY.children.modeChildrenButton, "こどもむけ");
-  assert.equal(HUB_COPY.all.modeAllButton, "すべて表示");
-  assert.equal(HUB_COPY.all.modeChildrenButton, "子ども向け表示");
+  assert.doesNotMatch(html, /data-mode=/);
+  assert.doesNotMatch(html, /catalog-modes/);
+});
+
+test("hubHasPickupMainFloorFamilyCornerAndGuide", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+
+  for (const id of ["pickup", "floor", "family", "guide"]) {
+    assert.match(html, new RegExp(`<section[^>]*\\bid="${id}"`), id);
+  }
 });
 
 test("privacyDisclosureRotatesOnlyItsDecorativeIcon", () => {
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const css = readFileSync(new URL("../style.css", import.meta.url), "utf8");
-  const summary = html.match(/<details class="parent-details">[\s\S]*?<summary>([\s\S]*?)<\/summary>/)?.[1] ?? "";
+  const summary = html.match(/<details class="guide-details">[\s\S]*?<summary>([\s\S]*?)<\/summary>/)?.[1] ?? "";
 
-  assert.match(summary, /<span class="privacy-summary-label" data-hub-copy="privacySummary">/);
+  assert.match(summary, /<span class="privacy-summary-label">/);
   assert.match(summary, /<span class="privacy-summary-icon" aria-hidden="true">/);
-  assert.match(css, /\.parent-details\[open\]\s+summary\s+\.privacy-summary-icon\s*\{\s*transform:\s*rotate\(45deg\);/);
-  assert.doesNotMatch(css, /\.parent-details\[open\]\s+summary\s+span\s*\{/);
+  assert.match(css, /\.guide-details\[open\]\s+summary\s+\.privacy-summary-icon\s*\{\s*transform:\s*rotate\(45deg\);/);
 });
